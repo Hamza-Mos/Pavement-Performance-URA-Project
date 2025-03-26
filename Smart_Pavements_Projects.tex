@@ -1,0 +1,545 @@
+\documentclass{article}
+\usepackage{graphicx}       % For including images
+\usepackage{booktabs}       % For better tables
+\usepackage{amsmath}        % For math formulas
+\usepackage{hyperref}       % For hyperlinks
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{geometry}       % For adjusting margins
+\usepackage{float}
+\geometry{margin=1in}
+
+\title{Smart Pavements Project: Model Analysis and Findings}
+\author{Hamza Mostafa}
+\date{March 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Pavement performance prediction is critical for effective pavement management and maintenance planning. In this study, we explored multiple modeling approaches including:
+\begin{itemize}
+    \item Three configurations of Explainable Boosting Machines (EBMs)
+    \item Baseline Random Forest (RF) models (with both 5 and 200 trees)
+    \item Ensemble methods that combine an interpretable model (EBM or Neural Additive Model) with a robust RF model
+\end{itemize}
+Our goal is to achieve high predictive accuracy (with testing R² above 0.95 in some cases) while maintaining model interpretability.
+
+\section{Terminology}
+
+Understanding the key terms used throughout this paper is essential for grasping our modeling approaches. Below are definitions of the most important concepts:
+
+\begin{itemize}
+    \item \textbf{Shape Function:}  
+    A function learned by an additive model (such as an EBM or NAM) that maps a feature’s value to its contribution to the final prediction. In an additive model, the overall prediction is given by an intercept (base prediction) plus the sum of the outputs of all shape functions:
+    \[
+    \hat{y} = \beta_0 + \sum_{i=1}^{n} f_i(x_i)
+    \]
+    where \( f_i(x_i) \) is the shape function for feature \( x_i \).
+
+    \item \textbf{Explainable Boosting Machine (EBM):}  
+    A type of generalized additive model that uses a boosting algorithm with tree-based methods to learn one-dimensional shape functions for each feature, and optionally, selected pairwise interactions. EBMs are designed to be highly interpretable by explicitly showing the effect of each feature on the prediction.
+
+    \item \textbf{Neural Additive Model (NAM):}  
+    Similar in spirit to EBMs, NAMs maintain an additive structure where each feature’s contribution is modeled by a small neural network. This allows NAMs to capture more complex non-linear relationships while still providing a level of interpretability through visualizable feature functions.
+
+    \item \textbf{Random Forest (RF):}  
+    An ensemble learning method that constructs multiple decision trees on bootstrapped samples of the data, with each tree using a random subset of features for splitting. The final prediction is the average (or majority vote) of the trees' outputs. Although RFs often achieve high predictive performance, their ensemble nature makes it more difficult to interpret individual feature contributions.
+
+    \item \textbf{Decision Tree (DT):}  
+    A tree-structured model that recursively splits the data based on feature thresholds to make predictions. Decision trees are inherently interpretable because one can trace the path from the root to a leaf to understand the decision process. However, single trees can be prone to overfitting and may not capture complex patterns as effectively as ensembles.
+
+    \item \textbf{Ensemble Model:}  
+    A model that combines the predictions of multiple base models to improve overall predictive performance. For example, an ensemble might average the outputs of an RF and an EBM (or NAM), often using optimized weights:
+    \[
+    \text{Prediction}_{\text{Ensemble}} = w \times \text{Prediction}_{\text{Model A}} + (1 - w) \times \text{Prediction}_{\text{Model B}}
+    \]
+    While ensembles can enhance accuracy and robustness, they can also obscure the interpretability that is inherent to models like EBMs and NAMs.
+\end{itemize}
+
+
+\section{Comparative Analysis of EBMs, RFs, DTs, and NAMs}
+
+In this section, we compare and explain four types of models used in our study: Explainable Boosting Machines (EBMs), Random Forests (RFs), Decision Trees (DTs), and Neural Additive Models (NAMs). We discuss how each model works, their tradeoffs, expected performance, and interpretability.
+
+\subsection*{Explainable Boosting Machines (EBMs)}
+EBMs are a type of generalized additive model that decompose the prediction into a baseline intercept plus the sum of individual feature contributions (shape functions), and optionally selected pairwise interactions.  
+\begin{itemize}
+    \item \textbf{How They Work:} EBMs use boosting to iteratively learn a function \( f_i(x_i) \) for each feature. The final prediction is given by
+    \[
+    \hat{y} = \beta_0 + \sum_{i=1}^{n} f_i(x_i) + \sum_{i<j} f_{ij}(x_i, x_j).
+    \]
+    \item \textbf{Tradeoffs:} They offer excellent interpretability since each feature's effect can be visualized. However, if many interactions are included, training can be computationally intensive and may risk overfitting.
+    \item \textbf{Performance and Interpretability:} EBMs tend to perform very well in settings where additive relationships dominate and are the most explainable of all the models discussed.
+\end{itemize}
+
+\subsubsection*{Internal Mechanism: Tree-Based Methods in EBMs}
+While EBMs do utilize tree-based methods as part of their internal mechanism, they differ from conventional decision tree ensembles in several key ways:
+\begin{itemize}
+    \item \textbf{Additive Structure:} Instead of combining many deep, complex trees (as in Random Forests or standard Gradient Boosting Machines), EBMs learn simple, one-dimensional functions for each feature (and selected pairwise interactions). The final prediction is expressed as:
+    \[
+    \hat{y} = \beta_0 + \sum_{i=1}^{n} f_i(x_i) + \sum_{i<j} f_{ij}(x_i,x_j)
+    \]
+    This additive structure is explicitly designed for interpretability.
+    \item \textbf{Controlled Complexity:} The underlying trees used in EBMs are constrained (e.g., through limited depth and careful binning) to ensure that the learned shape functions remain smooth and easy to visualize, rather than overfitting the data.
+    \item \textbf{Boosting Framework:} EBMs use a boosting algorithm to iteratively refine each shape function. Although trees are used to partition the data and create piecewise constant functions, the boosting process maintains a clear, transparent view of how each feature contributes to the final prediction.
+\end{itemize}
+Thus, while EBMs rely on tree-based methods under the hood, their overall architecture and training procedure are purposefully designed to yield a highly interpretable, additive model.
+
+
+\subsection*{Random Forests (RFs)}
+RFs are ensemble models that build many decision trees on bootstrapped samples and aggregate their predictions (by averaging for regression).  
+\begin{itemize}
+    \item \textbf{How They Work:} Each decision tree is built by recursively splitting the data based on a randomly selected subset of features. The final prediction is the average over all trees.
+    \item \textbf{Tradeoffs:} While RFs can capture complex interactions implicitly and are robust to overfitting, the ensemble nature makes them a “black box” compared to EBMs. Feature importance metrics are available but do not provide the same granular insight as shape functions.
+    \item \textbf{Performance and Interpretability:} RFs often achieve high predictive performance, especially when many trees are used. However, their interpretability is lower compared to EBMs and NAMs.
+\end{itemize}
+
+\subsection*{Decision Trees (DTs)}
+Decision Trees are the basic building blocks for RFs. They split data based on feature thresholds to form a tree structure where each leaf corresponds to a prediction.  
+\begin{itemize}
+    \item \textbf{How They Work:} A DT uses a series of binary splits based on the best feature and threshold at each node, often measured by criteria such as Gini impurity or mean squared error.
+    \item \textbf{Tradeoffs:} They are very intuitive and interpretable when the tree is shallow. However, deep trees tend to overfit, and a single tree usually does not capture the complexity in the data as well as an ensemble.
+    \item \textbf{Performance and Interpretability:} While highly interpretable when simple, DTs usually underperform compared to ensembles like RFs in terms of predictive accuracy.
+\end{itemize}
+
+\subsection*{Neural Additive Models (NAMs)}
+NAMs are similar to EBMs in that they maintain an additive structure but use neural networks to model each feature's contribution.  
+\begin{itemize}
+    \item \textbf{How They Work:} Each feature \(x_i\) is passed through its own neural network \(f_i(x_i)\) and the final prediction is the sum:
+    \[
+    \hat{y} = \beta_0 + \sum_{i=1}^{n} f_i(x_i).
+    \]
+    \item \textbf{Tradeoffs:} NAMs offer greater flexibility than traditional EBMs by capturing more complex non-linear relationships while retaining a level of interpretability. However, the neural network components can be less straightforward to interpret than the simpler shape functions of EBMs.
+    \item \textbf{Performance and Interpretability:} NAMs can sometimes outperform EBMs if the non-linear relationships are complex, but they are slightly less interpretable. When combined in an ensemble, they can complement RFs by capturing subtle non-linearities.
+\end{itemize}
+
+\subsection*{Summary of Comparison}
+\begin{itemize}
+    \item \textbf{Interpretability:} EBMs and NAMs are most explainable due to their additive structure, where each feature's impact is explicit. DTs are interpretable when simple, but RFs, while robust, are less transparent.
+    \item \textbf{Predictive Performance:} RFs often achieve the highest accuracy due to their ensemble nature, followed by NAMs and EBMs. DTs typically have lower predictive performance when used in isolation.
+    \item \textbf{Tradeoffs:} 
+    \begin{itemize}
+        \item EBMs strike a balance by offering high interpretability with competitive performance.
+        \item RFs provide strong predictive performance but sacrifice clarity.
+        \item DTs are simple and clear but may not capture all complexities in the data.
+        \item NAMs offer a flexible, interpretable alternative to EBMs and can capture more nuanced relationships, though at a slight cost in interpretability.
+    \end{itemize}
+\end{itemize}
+
+
+\section{Modeling Approaches}
+
+\subsection{Explainable Boosting Machines (EBM)}
+EBMs are a form of generalized additive model that express predictions as a sum of individual feature contributions (shape functions) and, optionally, pairwise interactions.
+
+\subsubsection*{Advantages and Tradeoffs}
+\begin{itemize}
+    \item \textbf{Advantages:}
+        \begin{itemize}
+            \item \textbf{Interpretability:} The additive nature allows for clear visualization of each feature's effect.
+            \item \textbf{Direct Insight:} Shape functions reveal how feature values push predictions up or down.
+        \end{itemize}
+    \item \textbf{Tradeoffs:}
+        \begin{itemize}
+            \item May under-capture complex interactions if too few interaction terms are allowed.
+            \item Training can be computationally intensive, particularly with many boosting rounds and interactions.
+        \end{itemize}
+\end{itemize}
+
+\subsubsection*{EBM Models}
+
+\textbf{Model 1: EBM\_Pavement\_Model}
+\begin{itemize}
+    \item \textbf{Parameters:}
+    \begin{itemize}
+        \item max\_rounds = 5000
+        \item interactions = 20
+        \item max\_bins = 512
+        \item outer\_bags = 32
+        \item inner\_bags = 4
+        \item learning\_rate = 0.005
+        \item early\_stopping\_rounds = 200
+        \item min\_samples\_leaf = 2
+        \item validation\_size = 0.2
+        \item random\_state = 42
+    \end{itemize}
+    \item \textbf{Training Time:} 1784.56 seconds (A100 GPU on Google Colab)
+    \item \textbf{Metrics:}
+    \begin{itemize}
+        \item Training R²: $\sim$0.9680
+        \item Testing R²: $\sim$0.9511
+        \item Training MSE: $\sim$0.4124
+        \item Testing MSE: $\sim$0.5729
+    \end{itemize}
+\end{itemize}
+
+\textbf{Model 2: EBM\_Pavement\_Model\_2}
+\begin{itemize}
+    \item \textbf{Training Environment:} MacBook M3 Pro
+    \item \textbf{Performance:} Nearly identical to Model 1 in terms of R² and MSE.
+\end{itemize}
+
+\textbf{Model 3: EBM\_Pavement\_Model\_3}
+\begin{itemize}
+    \item \textbf{Modified Parameters:}
+    \begin{itemize}
+        \item max\_rounds = 7500
+        \item learning\_rate = 0.003
+        \item interactions = 15
+        \item max\_interaction\_bins = 256
+        \item min\_samples\_leaf = 4
+        \item early\_stopping\_tolerance = 1e-4
+        \item outer\_bags = 40
+        \item inner\_bags = 2
+    \end{itemize}
+    \item \textbf{Goal:} Improve cross-validation stability.
+    \item \textbf{Results:} CV Mean R² $\approx$ 0.9525, Std $\approx$ 0.0044.
+\end{itemize}
+
+
+Model 2 was trained in an alternative environment (MacBook M3 Pro) with nearly identical performance. Model 3 used a modified configuration (e.g., max\_rounds = 7500, learning\_rate = 0.003, interactions = 15, max\_interaction\_bins = 256, min\_samples\_leaf = 4, early\_stopping\_tolerance = 1e-4, outer\_bags = 40, inner\_bags = 2) to improve cross-validation stability (CV Mean R² $\approx$ 0.9525, Std $\approx$ 0.0044).
+
+\subsection{Random Forests (RF) and Decision Trees (DT)}
+Random Forests (RFs) are ensembles of decision trees where each tree is trained on a bootstrapped sample of the data and splits are chosen from a random subset of features.
+\begin{itemize}
+    \item \textbf{Advantages:}
+        \begin{itemize}
+            \item High predictive performance by averaging many decision trees.
+            \item Robustness in capturing complex interactions.
+        \end{itemize}
+    \item \textbf{Tradeoffs:}
+        \begin{itemize}
+            \item Less interpretable due to the ensemble of many trees.
+            \item Feature importance is less straightforward than the explicit shape functions in EBMs.
+        \end{itemize}
+\end{itemize}
+
+\subsubsection*{RF Models}
+\textbf{Baseline RF (5 Trees):}
+\begin{itemize}
+    \item \textbf{Parameters:} n\_estimators = 5, max\_depth = 22, max\_features = 8, min\_samples\_leaf = 4, random\_state = 42.
+    \item \textbf{Metrics:} Training R² $\sim$0.9848, Testing R² $\sim$0.9582; Training MSE $\sim$0.1964, Testing MSE $\sim$0.4897.
+\end{itemize}
+
+\textbf{Extended RF (200 Trees):}
+\begin{itemize}
+    \item \textbf{Parameters:} n\_estimators = 200, max\_depth = None, min\_samples\_split = 2, random\_state = 42, n\_jobs = -1.
+    \item \textbf{Metrics:} Training R² $\sim$0.9860, Testing R² $\sim$0.9620; Training MSE $\sim$0.1850, Testing MSE $\sim$0.4800.
+\end{itemize}
+
+\subsection{Ensemble Models}
+Ensemble models combine the strengths of different approaches:
+\begin{itemize}
+    \item \textbf{RF-EBM Ensemble:} Combines an EBM (Model 1/2) with an RF model (either baseline or extended) using optimized weights.
+    \item \textbf{RF-NAM Ensemble:} Combines a Neural Additive Model (NAM) with a 200-tree RF.
+\end{itemize}
+
+\subsubsection*{Ensemble Weighting Formula}
+The final ensemble prediction is computed as a weighted average of the base models' predictions:
+\[
+\text{Prediction}_{\text{Ensemble}} = w \times \text{Prediction}_{\text{Model A}} + (1 - w) \times \text{Prediction}_{\text{Model B}}
+\]
+Here, \(w\) is the optimized weight determined (for example, via grid search) on a validation set, and Model A and Model B could be, for instance, an RF and an EBM (or NAM) respectively.
+
+\subsubsection*{Ensemble Metrics}
+\textbf{RF-EBM Ensemble:}
+\begin{itemize}
+    \item Training R² $\sim$0.9872, Testing R² $\sim$0.9623.
+    \item Training MSE $\sim$0.1827, Testing MSE $\sim$0.4657.
+\end{itemize}
+\textbf{RF-NAM Ensemble:}
+\begin{itemize}
+    \item Training R² $\sim$0.9885, Testing R² $\sim$0.9641.
+    \item Training MSE $\sim$0.1753, Testing MSE $\sim$0.4532.
+\end{itemize}
+
+\section{Results Summary Table}
+\begin{table}[h!]
+\centering
+\caption{Summary of Model Parameters and Performance Metrics}
+\label{tab:metrics}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{Model} & \textbf{Key Parameters} & \textbf{Train R²} & \textbf{Test R²} & \textbf{Train MSE} & \textbf{Test MSE} & \textbf{Training Time} \\ \midrule
+EBM\_Pavement\_Model & \begin{tabular}[c]{@{}l@{}}max\_rounds=5000,\\ interactions=20,\\ max\_bins=512\end{tabular} & 0.9680 & 0.9511 & 0.4124 & 0.5729 & 1784.56 sec \\[1ex]
+EBM\_Pavement\_Model\_2 & \begin{tabular}[c]{@{}l@{}}max\_rounds=7500,\\ interactions=15,\\ learning\_rate=0.003\end{tabular} & 0.9644 & 0.9468 & 0.4590 & 0.6240 & 7814.61 sec \\[1ex]
+RF (5 Trees) & \begin{tabular}[c]{@{}l@{}}n\_estimators=5,\\ max\_depth=22\end{tabular} & 0.9848 & 0.9582 & 0.1964 & 0.4897 & -- \\[1ex]
+RF (200 Trees) & \begin{tabular}[c]{@{}l@{}}n\_estimators=200,\\ max\_depth=None\end{tabular} & 0.9860 & 0.9620 & 0.1850 & 0.4800 & -- \\[1ex]
+RF-EBM Ensemble & Combined RF \& EBM & 0.9872 & 0.9623 & 0.1827 & 0.4657 & -- \\[1ex]
+RF-NAM Ensemble & Combined RF \& NAM & 0.9885 & 0.9641 & 0.1753 & 0.4532 & -- \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Rationale Behind Hyperparameter Choices}
+\subsection*{EBM Hyperparameters}
+\begin{itemize}
+    \item \textbf{max\_rounds:} Sets the maximum number of boosting iterations. More rounds allow the model to capture complex patterns but may increase training time and overfitting risk.
+    \item \textbf{interactions:} Determines how many pairwise interactions are included. More interactions can improve performance if non-additive effects exist but reduce interpretability.
+    \item \textbf{max\_bins:} Controls the discretization granularity for continuous features. Higher values capture finer details but can lead to noise.
+    \item \textbf{outer\_bags \& inner\_bags:} Control the bagging strategy to reduce variance and improve model stability.
+    \item \textbf{learning\_rate:} Governs the update magnitude per boosting round. A lower rate yields smoother convergence at the cost of longer training.
+    \item \textbf{early\_stopping\_rounds:} Stops training if no improvement is seen for a set number of rounds, preventing overfitting and saving time.
+    \item \textbf{min\_samples\_leaf:} Sets the minimum number of samples required at a leaf node, ensuring reliable estimates.
+    \item \textbf{validation\_size:} The fraction of training data used for validation to monitor progress.
+    \item \textbf{random\_state:} Ensures reproducibility.
+\end{itemize}
+
+\subsection*{RF Hyperparameters}
+\begin{itemize}
+    \item \textbf{n\_estimators:} Number of trees in the forest. More trees generally improve performance but increase computation.
+    \item \textbf{max\_depth:} Limits tree depth to control overfitting.
+    \item \textbf{max\_features:} Number of features considered for splitting, reducing correlation between trees.
+    \item \textbf{min\_samples\_leaf:} Ensures each leaf has a minimum number of samples, aiding in smoother predictions.
+\end{itemize}
+
+\subsection{Why Use Neural Additive Models (NAMs)?}
+\begin{itemize}
+    \item \textbf{Interpretability with Flexibility:} NAMs maintain an additive structure, similar to EBMs, where the final prediction is a sum of individual feature contributions:
+    \[
+    \text{Prediction}(x) = \beta_0 + f_1(x_1) + f_2(x_2) + \cdots + f_n(x_n)
+    \]
+    Each function \( f_i \) is modeled by a small neural network, enabling it to capture complex non-linear relationships.
+    \item \textbf{Visualization:} Like EBMs, the learned functions \( f_i \) can be visualized to understand how changes in a feature affect the prediction.
+    \item \textbf{Complementing RFs:} In an ensemble (RF-NAM), the NAM captures subtle non-linear effects in an interpretable manner, which complements the robust but less transparent RF predictions.
+\end{itemize}
+
+\section{Visualizations and Interpretability}
+Visualizations are based on the best performing EBM model (EBM\_Pavement\_Model\_2)
+\begin{itemize}
+    \item \textbf{Global Explanations:} Display the shape functions (feature contributions) learned by EBMs or NAMs.
+    \item \textbf{Local Explanations:} Provide detailed breakdowns for individual predictions.
+\end{itemize}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{global_explanation.png}
+   \caption{Global Explanation: EBM Shape Functions}
+   \label{fig:global_explanation}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{local_explanation.png}
+   \caption{Local Explanation: Feature Contributions for Individual Predictions}
+   \label{fig:local_explanation}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{CONSTRUCTION_NO.png}
+   \caption{CONSTRUCTION\_NO Shape Function}
+   \label{fig:CONSTRUCTION_NO}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{ANL_KESAL_LTPP_LN_YR.png}
+   \caption{ANL\_KESAL\_LTPP\_LN\_YR Shape Function}
+   \label{fig:ANL_KESAL_LTPP_LN_YR}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{TOTAL_ANN_PRECIP.png}
+   \caption{TOTAL\_ANN\_PRECIP Shape Function}
+   \label{fig:TOTAL_ANN_PRECIP}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{FREEZE_INDEX_YR.png}
+   \caption{FREEZE\_INDEX\_YR Shape Function}
+   \label{fig:FREEZE_INDEX_YR}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{MAX_ANN_TEMP_AVG.png}
+   \caption{MAX\_ANN\_TEMP\_AVG Shape Function}
+   \label{fig:MAX_ANN_TEMP_AVG}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{MAX_ANN_TEMP_DAYS.png}
+   \caption{MAX\_ANN\_TEMP\_DAYS Shape Function}
+   \label{fig:MAX_ANN_TEMP_DAYS}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{DAYS_ABOVE_32_C_YR.png}
+   \caption{DAYS\_ABOVE\_32\_C\_YR Shape Function}
+   \label{fig:DAYS_ABOVE_32_C_YR}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{MR_MATL_TYPE.png}
+   \caption{MR\_MATL\_TYPE Shape Function}
+   \label{fig:MR_MATL_TYPE}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{RES_MOD_AVG.png}
+   \caption{RES\_MOD\_AVG Shape Function}
+   \label{fig:RES_MOD_AVG}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\textwidth]{REPR_THICKNESS.png}
+   \caption{REPR\_THICKNESS Shape Function}
+   \label{fig:REPR_THICKNESS}
+\end{figure}
+
+
+\section{Experimental Results and Discussion}
+
+\subsection{Experiments on Individual Models}
+\textbf{Explainable Boosting Machines (EBMs):} \\
+Our grid search experiments for tuning the hyperparameters of the Explainable Boosting Machines (EBMs) were performed exclusively on the EBM models. For example, one search setup involved fitting 2-fold cross-validation for each of 20 candidate configurations (totaling 40 fits), while more exhaustive searches reached up to 144,000 fits. Despite the extensive search effort, the best configuration obtained (e.g., with parameters such as \texttt{max\_rounds}=7500, \texttt{interactions}=15, \texttt{max\_bins}=256, \texttt{learning\_rate}=0.005, \texttt{min\_samples\_leaf}=10) which provided the same best CV MSE as our previous EBM Model. \\
+
+This suggests that the default EBM parameters were already near-optimal for our task, and that further tuning produced diminishing returns in terms of predictive accuracy. However, even with the high computational cost associated with these exhaustive searches, the EBM models maintain their key advantage: high interpretability. The explicit, additive nature of EBM predictions—where each feature's contribution is visualized via shape functions—remains a significant benefit over more opaque modeling approaches. \\
+
+In summary, while the grid search for EBM models is computationally expensive, the incremental performance gains are relatively small, indicating that the baseline EBM settings already capture the essential data relationships with excellent interpretability. \\
+
+\bigskip
+
+\textbf{Random Forests (RFs):} \\
+For RFs, we performed exhaustive hyperparameter searches using both GridSearchCV and Bayesian optimization (Optuna). For example:
+\begin{itemize}
+    \item An exhaustive grid search over a wide parameter grid (e.g., n\_estimators ranging from 10 to 30, max\_depth from 5 to 30) yielded a best configuration of \{n\_estimators=30, max\_depth=25, max\_features=8, min\_samples\_leaf=3\} with a CV MSE of approximately 0.37366.
+    \item Bayesian optimization with Optuna identified a slightly different configuration (e.g., n\_estimators=45, max\_depth=30, max\_features=5, min\_samples\_leaf=3) with a comparable CV MSE (around 0.386), and test metrics in the range of Test MSE $\sim$0.4229 and Test R² $\sim$0.9638.
+\end{itemize}
+Both methods converged to similar performance, indicating that the RF model's performance is robust within a certain parameter range.
+
+\subsection{Feature Engineering Experiments}
+We integrated feature engineering into our pipelines using custom transformers and additional preprocessing steps. Specifically, we introduced features and transformations such as:
+\begin{itemize}
+    \item \textbf{TEMP\_RATIO:} 
+    \[
+    \text{TEMP\_RATIO} = \frac{\text{MAX\_ANN\_TEMP\_DAYS}}{\text{MAX\_ANN\_TEMP\_AVG} + 1}
+    \]
+    (the ratio of \(\text{MAX\_ANN\_TEMP\_DAYS}\) to \(\text{MAX\_ANN\_TEMP\_AVG}\), with a small constant added to avoid division by zero).
+
+    \item \textbf{PRECIP\_KESAL:} 
+    \[
+    \text{PRECIP\_KESAL} = \text{TOTAL\_ANN\_PRECIP} \times \text{ANL\_KESAL\_LTPP\_LN\_YR}
+    \]
+
+    \item \textbf{RES\_MOD\_RATIO:} 
+    \[
+    \text{RES\_MOD\_RATIO} = \frac{\text{RES\_MOD\_AVG}}{\text{REPR\_THICKNESS} + 1}
+    \]
+
+    \item \textbf{TEMP\_PRECIP\_PRODUCT:} 
+    \[
+    \text{TEMP\_PRECIP\_PRODUCT} = \text{MAX\_ANN\_TEMP\_AVG} \times \text{TOTAL\_ANN\_PRECIP}
+    \]
+
+    \item \textbf{Log Transform:} 
+    \[
+    \log(\text{feature} + 1)
+    \]
+    applied to various continuous features to stabilize variance and approximate normality.
+
+    \item \textbf{Degree-2 Polynomial Expansion:} For a vector of features 
+    \(\mathbf{x} = (x_1, x_2, \ldots, x_d)\), this transformation creates new features by including:
+    \begin{itemize}
+        \item The squares of each individual feature: \(x_i^2\) for \(i = 1, \dots, d\).
+        \item All cross-terms: \(x_i \times x_j\) for \(i < j\).
+    \end{itemize}
+    For example, consider the two features:
+    \begin{itemize}
+        \item \( T = \text{MAX\_ANN\_TEMP\_AVG} \) (Average Annual Temperature)
+        \item \( P = \text{TOTAL\_ANN\_PRECIP} \) (Total Annual Precipitation)
+    \end{itemize}
+    The degree-2 polynomial expansion transforms \([T, P]\) into:
+    \[
+    \begin{bmatrix}
+    T \\
+    P \\
+    T^2 \\
+    T \times P \\
+    P^2
+    \end{bmatrix}
+    \]
+    This not only retains the original features, but also captures their squared effects and interactions.
+
+\end{itemize}
+
+Our grid search experiments (both exhaustive and using Bayesian optimization) revealed:
+\begin{itemize}
+    \item \textbf{Beneficial:} The \texttt{TEMP\_PRECIP\_PRODUCT} (\(\text{MAX\_ANN\_TEMP\_AVG} \times \text{TOTAL\_ANN\_PRECIP}\)) consistently improved model performance, especially when used in combination with a log transformation \(\bigl(\log(\cdot + 1)\bigr)\) and degree-2 polynomial expansions (which add squares and cross-terms of all selected features).
+    \item \textbf{Mixed:} \texttt{TEMP\_RATIO} and \texttt{PRECIP\_KESAL} yielded marginal improvements in some cases but not in others, suggesting their benefit may be context-dependent.
+    \item \textbf{Not Helpful:} \texttt{RES\_MOD\_RATIO} was generally not selected in the best-performing pipelines, indicating little or no gain in predictive performance from this transformation.
+\end{itemize}
+
+
+These experiments suggest that while additional feature engineering can help, the most significant gains came from including the \texttt{TEMP\_PRECIP\_PRODUCT} and applying transformations (like logarithmic scaling and polynomial expansion) to capture non-linear relationships. Further expansion of the feature space might yield additional improvements, but diminishing returns may be encountered beyond this point.
+
+\section{Summary of Model Performance and Findings}
+The following table summarizes key performance metrics for the models tested:
+
+\begin{table}[H]
+\centering
+\caption{Summary of Model Parameters and Performance Metrics}
+\label{tab:metrics}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{Model} & \textbf{Key Parameters} & \textbf{Train R²} & \textbf{Test R²} & \textbf{Train MSE} & \textbf{Test MSE} & \textbf{Training Time} \\ \midrule
+EBM\_Pavement\_Model & \begin{tabular}[c]{@{}l@{}}max\_rounds=5000,\\ interactions=20,\\ max\_bins=512\end{tabular} & 0.9680 & 0.9511 & 0.4124 & 0.5729 & 1784.56 sec \\[1ex]
+EBM\_Pavement\_Model\_2 & \begin{tabular}[c]{@{}l@{}}max\_rounds=7500,\\ interactions=15,\\ learning\_rate=0.003\end{tabular} & 0.9644 & 0.9468 & 0.4590 & 0.6240 & 7814.61 sec \\[1ex]
+RF (5 Trees) & \begin{tabular}[c]{@{}l@{}}n\_estimators=5,\\ max\_depth=22\end{tabular} & 0.9848 & 0.9582 & 0.1964 & 0.4897 & -- \\[1ex]
+RF (200 Trees) & \begin{tabular}[c]{@{}l@{}}n\_estimators=200,\\ max\_depth=None\end{tabular} & 0.9860 & 0.9620 & 0.1850 & 0.4800 & -- \\[1ex]
+RF-EBM Ensemble & Combined RF \& EBM & 0.9872 & 0.9623 & 0.1827 & 0.4657 & -- \\[1ex]
+RF-NAM Ensemble & Combined RF \& NAM & 0.9885 & 0.9641 & 0.1753 & 0.4532 & -- \\[1ex]
+\textbf{RF (with Feature Engineering)} & \begin{tabular}[c]{@{}l@{}}Best parameters from grid search:\\ n\_estimators=20, max\_depth=25,\\ max\_features=8, min\_samples\_leaf=3\\ with log transformation and\\ polynomial features (degree 1)\end{tabular} & --- & --- & --- & 0.37366 (CV MSE) & --- \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\bigskip
+
+\noindent In summary, both exhaustive grid search and Bayesian optimization converged to similar performance levels for the RF model. Our feature engineering experiments indicate that certain engineered features (notably the \texttt{TEMP\_PRECIP\_PRODUCT}) and transformations (log scaling and degree-2 polynomial expansions) provide the most benefit, while others (e.g., \texttt{RES\_MOD\_RATIO}) do not improve performance.
+
+\bigskip
+
+\noindent These findings offer a balanced view between achieving high predictive performance and maintaining interpretability, which is critical for practical pavement management decisions.
+
+
+\section{Future Directions}
+Future work may include:
+\begin{itemize}
+    \item \textbf{Advanced Hyperparameter Tuning:} Employ grid search, randomized search, or halving methods to explore a broader hyperparameter space. Such searches are compute intensive but could further optimize performance.
+    \item \textbf{Refining Ensemble Methods:} Explore alternative ensemble strategies (e.g., combining NAMs with RFs) to improve prediction accuracy while monitoring the interpretability tradeoff.
+    \item \textbf{Enhanced Feature Engineering:} Develop new features or transformations based on domain expertise to capture additional nuances in pavement performance.
+    \item \textbf{Scaling Compute Resources:} Utilize more powerful hardware or cloud-based solutions to perform exhaustive hyperparameter searches in a shorter time.
+\end{itemize}
+
+\section{Conclusions}
+Our analysis demonstrates that:
+\begin{itemize}
+    \item \textbf{Individual Models:} Both EBMs and RFs achieve high predictive accuracy, with testing R² values above 0.94. EBMs, however, provide superior interpretability through clear, additive shape functions.
+    \item \textbf{Ensemble Methods:} Combining an interpretable model (EBM or NAM) with a robust RF enhances performance further (improved R² and reduced MSE), but this comes at the cost of reduced transparency in the final ensemble predictions.
+    \item \textbf{Tradeoffs:} There exists a balance between model complexity, predictive performance, and interpretability. While ensemble methods yield incremental improvements, the pure EBM (or NAM) model offers a uniquely transparent view of feature contributions, which is invaluable for practical decision-making.
+\end{itemize}
+
+% \section*{Acknowledgments}
+% % Insert acknowledgments for collaborators, funding sources, or institutions if applicable.
+
+\begin{thebibliography}{1}
+
+\bibitem{interpretML}
+InterpretML, ``Explainable Boosting Machine (EBM) Documentation,'' \url{https://interpret.ml/docs/ebm.html} [Accessed: March 2025]. (This framework was used for building the EBM.)
+
+\end{thebibliography}
+
+
+\end{document}

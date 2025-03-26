@@ -1,0 +1,377 @@
+// Pavement Monitoring System - Time Series Database Schema
+// DBML format for visualization in https://dbdiagram.io/
+
+// Metadata Tables
+
+Table SensorInformation {
+  SensorID varchar(20) [pk, note: 'Unique sensor identifier (e.g., TEMPS-02-1)']
+  SensorType varchar(20) [not null, note: 'TEMPERATURE, STRAIN, PRESSURE, MOISTURE, WEATHER']
+  ModelNumber varchar(50) [note: 'Manufacturer model number']
+  Orientation varchar(20) [note: 'LONGITUDINAL, TRANSVERSE, VERTICAL, N/A']
+  WheelPath varchar(10) [note: 'RIGHT, LEFT, N/A']
+  Depth decimal(6,1) [not null, note: 'Depth from pavement surface in mm']
+  LayerType varchar(20) [not null, note: 'ASPHALT, BASE, SUBBASE, SUBGRADE, AIR, N/A']
+  XCoordinate decimal(9,3) [note: 'Position coordinate (if available)']
+  YCoordinate decimal(9,3) [note: 'Position coordinate (if available)']
+  ZCoordinate decimal(9,3) [note: 'Position coordinate (if available)']
+  InstallationDate timestamp [note: 'When the sensor was installed']
+  CalibrationFormula text [note: 'Formula used for calibration (e.g., y=0.7484x-0.7417)']
+  MeasurementUnit varchar(10) [not null, note: 'C, mV, MPa, µε, etc.']
+  MinValue decimal(9,3) [note: 'Minimum measurable value']
+  MaxValue decimal(9,3) [note: 'Maximum measurable value']
+  Accuracy decimal(9,3) [note: 'Sensor accuracy']
+  Description text [note: 'Additional details about the sensor']
+  IsActive boolean [default: true, note: 'Whether the sensor is currently active']
+  CreatedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When the record was created']
+  UpdatedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When the record was last updated']
+}
+
+Table ProjectInformation {
+  ProjectID varchar(20) [pk, note: 'Project identifier']
+  ProjectName varchar(100) [not null, note: 'Name of the project']
+  Location varchar(100) [note: 'Geographic location description']
+  Latitude decimal(9,6) [note: 'GPS coordinates']
+  Longitude decimal(9,6) [note: 'GPS coordinates'] 
+  PavementAge decimal(5,2) [note: 'Age in years']
+  ConstructionDate timestamp [note: 'When the pavement was constructed']
+  PavementType varchar(50) [note: 'Type of pavement structure']
+  ClimateRegion varchar(50) [note: 'Climate classification']
+  AnnualFreezingIndex decimal(9,2) [note: 'Freezing index value']
+  AnnualPrecipitation decimal(9,2) [note: 'In mm']
+  AnnualAverageTemperature decimal(5,2) [note: 'In degrees Celsius']
+  AADT int [note: 'Annual Average Daily Traffic']
+  AADTT int [note: 'Annual Average Daily Truck Traffic']
+  Description text [note: 'Project description']
+  ContactInformation text [note: 'Contact details']
+  CreatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+  UpdatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+// Raw Time Series Data Tables
+
+Table RawTemperatureData {
+  ReadingID bigint [pk, increment, note: 'Unique identifier for the reading']
+  Timestamp timestamp [not null, note: 'When the reading was taken']
+  SensorID varchar(20) [not null, note: 'Reference to the temperature sensor']
+  TemperatureValue decimal(5,2) [not null, note: 'Temperature in degrees Celsius']
+
+  indexes {
+    Timestamp [name: 'idx_temp_timestamp']
+    (SensorID, Timestamp) [name: 'idx_temp_sensor_time']
+  }
+}
+
+Table WeatherData {
+  WeatherID bigint [pk, increment, note: 'Unique identifier for the weather reading']
+  Timestamp timestamp [not null, note: 'When the reading was taken']
+  AirTemperature decimal(5,2) [note: 'Air temperature in degrees Celsius']
+  RelativeHumidity decimal(5,2) [note: 'Percentage']
+  Precipitation decimal(6,2) [note: 'In mm']
+  WindSpeed decimal(5,2) [note: 'In km/h']
+  WindDirection varchar(10) [note: 'N, NE, E, SE, S, SW, W, NW']
+  BarometricPressure decimal(6,2) [note: 'In hPa']
+  SolarRadiation decimal(7,2) [note: 'In W/m²']
+  DataSource varchar(50) [note: 'Source of weather data']
+  RecordedAt timestamp [default: 'CURRENT_TIMESTAMP']
+
+  indexes {
+    Timestamp [name: 'idx_weather_timestamp']
+  }
+}
+
+Table StrainData {
+  ReadingID bigint [pk, increment, note: 'Unique identifier for the reading']
+  Timestamp timestamp [not null, note: 'When the reading was taken']
+  SensorID varchar(20) [not null, note: 'Reference to the strain sensor']
+  StrainValue decimal(9,3) [not null, note: 'In microstrain (µε)']
+
+  indexes {
+    Timestamp [name: 'idx_strain_timestamp']
+    (SensorID, Timestamp) [name: 'idx_strain_sensor_time']
+  }
+}
+
+Table PressureData {
+  ReadingID bigint [pk, increment, note: 'Unique identifier for the reading']
+  Timestamp timestamp [not null, note: 'When the reading was taken']
+  SensorID varchar(20) [not null, note: 'Reference to the pressure sensor']
+  PressureValue decimal(9,3) [not null, note: 'In MPa']
+
+  indexes {
+    Timestamp [name: 'idx_pressure_timestamp']
+    (SensorID, Timestamp) [name: 'idx_pressure_sensor_time']
+  }
+}
+
+Table MoistureData {
+  ReadingID bigint [pk, increment, note: 'Unique identifier for the reading']
+  Timestamp timestamp [not null, note: 'When the reading was taken']
+  SensorID varchar(20) [not null, note: 'Reference to the moisture sensor']
+  MoistureValue decimal(9,3) [not null, note: 'Volumetric water content (m³/m³)']
+  RawValue decimal(9,3) [note: 'Raw reading in mV']
+
+  indexes {
+    Timestamp [name: 'idx_moisture_timestamp']
+    (SensorID, Timestamp) [name: 'idx_moisture_sensor_time']
+  }
+}
+
+// Aggregated Time Series Data Tables
+
+Table TempData15Min {
+  AggregateID bigint [pk, increment, note: 'Unique identifier for the aggregate record']
+  Timestamp timestamp [not null, note: 'Start of 15-minute interval']
+  SensorID varchar(20) [not null, note: 'Reference to the temperature sensor']
+  MeanValue decimal(5,2) [not null, note: 'Average temperature in interval']
+  MinValue decimal(5,2) [not null, note: 'Minimum temperature in interval']
+  MaxValue decimal(5,2) [not null, note: 'Maximum temperature in interval']
+  StdDevValue decimal(5,2) [not null, note: 'Standard deviation of temperatures in interval']
+  ReadingCount integer [not null, note: 'Number of readings in interval']
+  IntervalEnd timestamp [not null, note: 'End of 15-minute interval']
+  ProcessedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When aggregation was performed']
+
+  indexes {
+    Timestamp [name: 'idx_temp15min_timestamp']
+    (SensorID, Timestamp) [name: 'idx_temp15min_sensor_time']
+    (Timestamp, SensorID) [unique, name: 'uq_temp15min_time_sensor']
+  }
+}
+
+Table TempDataHourly {
+  AggregateID bigint [pk, increment, note: 'Unique identifier for the aggregate record']
+  Timestamp timestamp [not null, note: 'Start of hourly interval']
+  SensorID varchar(20) [not null, note: 'Reference to the temperature sensor']
+  MeanValue decimal(5,2) [not null, note: 'Average temperature in interval']
+  MinValue decimal(5,2) [not null, note: 'Minimum temperature in interval']
+  MaxValue decimal(5,2) [not null, note: 'Maximum temperature in interval']
+  StdDevValue decimal(5,2) [not null, note: 'Standard deviation of temperatures in interval']
+  ReadingCount integer [not null, note: 'Number of readings in interval']
+  IntervalEnd timestamp [not null, note: 'End of hourly interval']
+  ProcessedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When aggregation was performed']
+
+  indexes {
+    Timestamp [name: 'idx_temphourly_timestamp']
+    (SensorID, Timestamp) [name: 'idx_temphourly_sensor_time']
+    (Timestamp, SensorID) [unique, name: 'uq_temphourly_time_sensor']
+  }
+}
+
+Table TempDataDaily {
+  AggregateID bigint [pk, increment, note: 'Unique identifier for the aggregate record']
+  Timestamp timestamp [not null, note: 'Start of day (midnight)']
+  SensorID varchar(20) [not null, note: 'Reference to the temperature sensor']
+  MeanValue decimal(5,2) [not null, note: 'Daily average temperature']
+  MinValue decimal(5,2) [not null, note: 'Daily minimum temperature']
+  MaxValue decimal(5,2) [not null, note: 'Daily maximum temperature']
+  StdDevValue decimal(5,2) [not null, note: 'Standard deviation of temperatures in day']
+  TempRange decimal(5,2) [not null, note: 'Max - Min temperature for the day']
+  ReadingCount integer [not null, note: 'Number of readings in day']
+  MinTimestamp timestamp [note: 'Time of day when min temp occurred']
+  MaxTimestamp timestamp [note: 'Time of day when max temp occurred']
+  DayNightDelta decimal(5,2) [note: 'Difference between day and night temps']
+  IntervalEnd timestamp [not null, note: 'End of day']
+  ProcessedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When aggregation was performed']
+
+  indexes {
+    Timestamp [name: 'idx_tempdaily_timestamp']
+    (SensorID, Timestamp) [name: 'idx_tempdaily_sensor_time']
+    (Timestamp, SensorID) [unique, name: 'uq_tempdaily_time_sensor']
+  }
+}
+
+Table TempDataWeekly {
+  AggregateID bigint [pk, increment, note: 'Unique identifier for the aggregate record']
+  Timestamp timestamp [not null, note: 'Start of week (Monday)']
+  SensorID varchar(20) [not null, note: 'Reference to the temperature sensor']
+  MeanValue decimal(5,2) [not null, note: 'Weekly average temperature']
+  MinValue decimal(5,2) [not null, note: 'Weekly minimum temperature']
+  MaxValue decimal(5,2) [not null, note: 'Weekly maximum temperature']
+  StdDevValue decimal(5,2) [not null, note: 'Standard deviation of temperatures in week']
+  TempRange decimal(5,2) [not null, note: 'Max - Min temperature for the week']
+  ReadingCount integer [not null, note: 'Number of readings in week']
+  LayerType varchar(20) [not null, note: 'Layer where sensor is located']
+  Depth decimal(6,1) [not null, note: 'Depth of sensor from surface in mm']
+  MinTimestamp timestamp [note: 'Time during week when min temp occurred']
+  MaxTimestamp timestamp [note: 'Time during week when max temp occurred']
+  WeekdayAvgTemp decimal(5,2) [note: 'Average temperature on weekdays']
+  WeekendAvgTemp decimal(5,2) [note: 'Average temperature on weekends']
+  IntervalEnd timestamp [not null, note: 'End of week (Sunday)']
+  ProcessedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When aggregation was performed']
+
+  indexes {
+    Timestamp [name: 'idx_tempweekly_timestamp']
+    (SensorID, Timestamp) [name: 'idx_tempweekly_sensor_time']
+    (Timestamp, SensorID) [unique, name: 'uq_tempweekly_time_sensor']
+  }
+}
+
+Table WeatherDataHourly {
+  AggregateID bigint [pk, increment, note: 'Unique identifier for the aggregate record']
+  Timestamp timestamp [not null, note: 'Start of hourly interval']
+  MeanAirTemp decimal(5,2) [note: 'Average air temperature in interval']
+  MinAirTemp decimal(5,2) [note: 'Minimum air temperature in interval']
+  MaxAirTemp decimal(5,2) [note: 'Maximum air temperature in interval']
+  StdDevAirTemp decimal(5,2) [note: 'Standard deviation of air temperature in interval']
+  MeanHumidity decimal(5,2) [note: 'Average humidity in interval']
+  TotalPrecipitation decimal(6,2) [note: 'Total precipitation in interval in mm']
+  MeanWindSpeed decimal(5,2) [note: 'Average wind speed in interval']
+  MaxWindSpeed decimal(5,2) [note: 'Maximum wind speed in interval']
+  PredominantWindDirection varchar(10) [note: 'Most common wind direction in interval']
+  MeanBarometricPressure decimal(6,2) [note: 'Average barometric pressure in interval']
+  MeanSolarRadiation decimal(7,2) [note: 'Average solar radiation in interval']
+  ReadingCount integer [not null, note: 'Number of readings in interval']
+  IntervalEnd timestamp [not null, note: 'End of hourly interval']
+  ProcessedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When aggregation was performed']
+
+  indexes {
+    Timestamp [unique, name: 'idx_weatherhourly_timestamp']
+  }
+}
+
+Table WeatherDataDaily {
+  AggregateID bigint [pk, increment, note: 'Unique identifier for the aggregate record']
+  Timestamp timestamp [not null, note: 'Start of day (midnight)']
+  MeanAirTemp decimal(5,2) [note: 'Daily average air temperature']
+  MinAirTemp decimal(5,2) [note: 'Daily minimum air temperature']
+  MaxAirTemp decimal(5,2) [note: 'Daily maximum air temperature']
+  StdDevAirTemp decimal(5,2) [note: 'Standard deviation of air temperatures in day']
+  AirTempRange decimal(5,2) [note: 'Max - Min air temperature for the day']
+  MeanHumidity decimal(5,2) [note: 'Daily average humidity']
+  MinHumidity decimal(5,2) [note: 'Daily minimum humidity']
+  MaxHumidity decimal(5,2) [note: 'Daily maximum humidity']
+  TotalPrecipitation decimal(6,2) [note: 'Total daily precipitation in mm']
+  MeanWindSpeed decimal(5,2) [note: 'Daily average wind speed']
+  MaxWindSpeed decimal(5,2) [note: 'Daily maximum wind speed']
+  PredominantWindDirection varchar(10) [note: 'Most common wind direction in day']
+  MeanBarometricPressure decimal(6,2) [note: 'Daily average barometric pressure']
+  MeanSolarRadiation decimal(7,2) [note: 'Daily average solar radiation']
+  PrecipitationHours integer [note: 'Hours with precipitation']
+  ReadingCount integer [not null, note: 'Number of readings in day']
+  IntervalEnd timestamp [not null, note: 'End of day']
+  ProcessedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When aggregation was performed']
+
+  indexes {
+    Timestamp [unique, name: 'idx_weatherdaily_timestamp']
+  }
+}
+
+Table WeatherDataWeekly {
+  AggregateID bigint [pk, increment, note: 'Unique identifier for the aggregate record']
+  Timestamp timestamp [not null, note: 'Start of week (Monday)']
+  MeanAirTemp decimal(5,2) [note: 'Weekly average air temperature']
+  MinAirTemp decimal(5,2) [note: 'Weekly minimum air temperature']
+  MaxAirTemp decimal(5,2) [note: 'Weekly maximum air temperature']
+  StdDevAirTemp decimal(5,2) [note: 'Standard deviation of air temperatures in week']
+  AirTempRange decimal(5,2) [note: 'Max - Min air temperature for the week']
+  MeanHumidity decimal(5,2) [note: 'Weekly average humidity']
+  MinHumidity decimal(5,2) [note: 'Weekly minimum humidity']
+  MaxHumidity decimal(5,2) [note: 'Weekly maximum humidity']
+  TotalPrecipitation decimal(6,2) [note: 'Total weekly precipitation in mm']
+  MeanWindSpeed decimal(5,2) [note: 'Weekly average wind speed']
+  MaxWindSpeed decimal(5,2) [note: 'Weekly maximum wind speed']
+  PredominantWindDirection varchar(10) [note: 'Most common wind direction in week']
+  MeanBarometricPressure decimal(6,2) [note: 'Weekly average barometric pressure']
+  MeanSolarRadiation decimal(7,2) [note: 'Weekly average solar radiation']
+  RainyDays integer [note: 'Days with precipitation > 0.5mm']
+  SunnyHours decimal(5,1) [note: 'Total hours with significant solar radiation']
+  ReadingCount integer [not null, note: 'Number of readings in week']
+  IntervalEnd timestamp [not null, note: 'End of week (Sunday)']
+  ProcessedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When aggregation was performed']
+
+  indexes {
+    Timestamp [unique, name: 'idx_weatherweekly_timestamp']
+  }
+}
+
+// Analysis Tables
+
+Table TemperatureGradientWeekly {
+  GradientID bigint [pk, increment, note: 'Unique identifier for the gradient record']
+  Timestamp timestamp [not null, note: 'Start of week (Monday)']
+  AsphaltMeanTemp decimal(5,2) [note: 'Weekly average temperature in asphalt layer']
+  BaseMeanTemp decimal(5,2) [note: 'Weekly average temperature in base layer']
+  SubbaseMeanTemp decimal(5,2) [note: 'Weekly average temperature in subbase layer']
+  SubgradeMeanTemp decimal(5,2) [note: 'Weekly average temperature in subgrade layer']
+  AsphaltToBaseGradient decimal(6,3) [note: 'Temperature gradient between asphalt and base in °C/m']
+  BaseToSubbaseGradient decimal(6,3) [note: 'Temperature gradient between base and subbase in °C/m']
+  SubbaseToSubgradeGradient decimal(6,3) [note: 'Temperature gradient between subbase and subgrade in °C/m']
+  SurfaceToBottomGradient decimal(6,3) [note: 'Temperature gradient between surface and bottom in °C/m']
+  MaxDailyGradient decimal(6,3) [note: 'Maximum daily gradient observed during week']
+  MaxGradientTimestamp timestamp [note: 'When maximum gradient occurred']
+  DiurnalVariationSurface decimal(5,2) [note: 'Average day/night temperature difference at surface']
+  DiurnalVariationBase decimal(5,2) [note: 'Average day/night temperature difference at base']
+  IntervalEnd timestamp [not null, note: 'End of week (Sunday)']
+  ProcessedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When analysis was performed']
+
+  indexes {
+    Timestamp [unique, name: 'idx_tempgradient_timestamp']
+  }
+}
+
+// System Tables
+
+Table SystemStatus {
+  StatusID integer [pk, increment, note: 'Unique identifier for status entry']
+  StatusType varchar(50) [not null, note: 'Type of processing job']
+  LastRunTimestamp timestamp [note: 'When the process last ran']
+  LastProcessedTimestamp timestamp [note: 'Last data point that was processed']
+  Status varchar(20) [note: 'SUCCESS, FAILED, RUNNING']
+  Message text [note: 'Details about the status']
+  UpdatedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When this record was updated']
+
+  indexes {
+    StatusType [unique, name: 'idx_status_type']
+  }
+}
+
+Table ArchiveInfo {
+  ArchiveID integer [pk, increment, note: 'Unique identifier for the archive']
+  IntervalStart timestamp [not null, note: 'Start of archived period']
+  IntervalEnd timestamp [not null, note: 'End of archived period']
+  ArchiveDate timestamp [not null, note: 'When the archive was created']
+  ArchiveFilePath varchar(255) [not null, note: 'Path to the ZIP archive file']
+  FileSize bigint [note: 'Size in bytes']
+  ArchiveStatus varchar(20) [default: 'COMPLETED', note: 'COMPLETED, FAILED, PARTIAL']
+  Notes text [note: 'Additional information']
+  CreatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+
+  indexes {
+    (IntervalStart, IntervalEnd) [name: 'idx_archive_interval']
+  }
+}
+
+Table SensorHealthMonitoring {
+  HealthID bigint [pk, increment, note: 'Unique identifier for the health record']
+  Timestamp timestamp [not null, note: 'Day of health check']
+  SensorID varchar(20) [not null, note: 'Reference to the sensor']
+  DataCaptureRate decimal(5,2) [note: 'Percentage of expected readings received']
+  NoiseLevel decimal(5,2) [note: 'Measure of signal noise']
+  AnomalyCount integer [note: 'Number of anomalous readings']
+  BatteryLevel decimal(5,2) [note: 'If applicable']
+  SignalStrength decimal(5,2) [note: 'If applicable']
+  FailureFlags integer [note: 'Bit flags for various failure modes']
+  HealthStatus varchar(20) [note: 'GOOD, WARNING, CRITICAL, OFFLINE']
+  Notes text [note: 'Additional details about sensor health']
+  ProcessedAt timestamp [default: 'CURRENT_TIMESTAMP', note: 'When health check was performed']
+
+  indexes {
+    Timestamp [name: 'idx_sensorhealth_timestamp']
+    (SensorID, Timestamp) [name: 'idx_sensorhealth_sensor_time']
+    HealthStatus [name: 'idx_sensorhealth_status']
+    (Timestamp, SensorID) [unique, name: 'uq_sensorhealth_time_sensor']
+  }
+}
+
+// Relationships
+
+Ref: RawTemperatureData.SensorID > SensorInformation.SensorID
+Ref: StrainData.SensorID > SensorInformation.SensorID
+Ref: PressureData.SensorID > SensorInformation.SensorID
+Ref: MoistureData.SensorID > SensorInformation.SensorID
+
+Ref: TempData15Min.SensorID > SensorInformation.SensorID
+Ref: TempDataHourly.SensorID > SensorInformation.SensorID
+Ref: TempDataDaily.SensorID > SensorInformation.SensorID
+Ref: TempDataWeekly.SensorID > SensorInformation.SensorID
+
+Ref: SensorHealthMonitoring.SensorID > SensorInformation.SensorID
