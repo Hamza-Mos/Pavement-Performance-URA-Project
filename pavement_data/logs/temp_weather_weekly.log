@@ -1,134 +1,53 @@
-2025-03-25 05:16:08,446 - __main__ - INFO - Last processed week: 2000-01-01
-2025-03-25 05:16:08,446 - __main__ - INFO - Processing data up to week starting: 2025-03-17
-2025-03-25 05:16:08,446 - __main__ - INFO - Initializing database at /Users/hamza/Desktop/Pavement Performance - Sagun/pavement_data/database/pavement_data.db
-2025-03-25 05:16:08,450 - __main__ - INFO - Database initialized
-2025-03-25 05:16:08,450 - __main__ - INFO - Reading temperature daily data files
-2025-03-25 05:16:08,450 - __main__ - INFO - Processing all data regardless of last processed week
-2025-03-25 05:16:08,450 - __main__ - WARNING - No temperature daily data files found
-2025-03-25 05:16:08,450 - __main__ - INFO - Reading weather daily data files
-2025-03-25 05:16:08,450 - __main__ - INFO - Processing all data regardless of last processed week
-2025-03-25 05:16:08,450 - __main__ - WARNING - No weather daily data files found
-2025-03-25 05:16:08,450 - __main__ - INFO - No weeks to process within the valid range
-2025-03-25 05:17:28,055 - __main__ - INFO - Last processed week: 2000-01-01
-2025-03-25 05:17:28,055 - __main__ - INFO - Processing data up to week starting: 2025-03-17
-2025-03-25 05:17:28,055 - __main__ - INFO - Initializing database at /Users/hamza/Desktop/Pavement Performance - Sagun/pavement_data/database/pavement_data.db
-2025-03-25 05:17:28,056 - __main__ - INFO - Database initialized
-2025-03-25 05:17:28,056 - __main__ - INFO - Reading temperature daily data files
-2025-03-25 05:17:28,056 - __main__ - INFO - Processing all data regardless of last processed week
-2025-03-25 05:17:28,056 - __main__ - INFO - Reading file: /Users/hamza/Desktop/Pavement Performance - Sagun/pavement_data/processed/daily/temperature_daily_20250325.csv
-2025-03-25 05:17:28,058 - __main__ - INFO - Found 15 rows of data in file
-2025-03-25 05:17:28,059 - __main__ - INFO - Total temperature data to process: 15 rows
-2025-03-25 05:17:28,059 - __main__ - INFO - Week range: 1970-01-12 00:00:00 to 1970-01-12 00:00:00
-2025-03-25 05:17:28,059 - __main__ - INFO - Reading weather daily data files
-2025-03-25 05:17:28,059 - __main__ - INFO - Processing all data regardless of last processed week
-2025-03-25 05:17:28,059 - __main__ - WARNING - No weather daily data files found
-2025-03-25 05:17:28,060 - __main__ - INFO - Processing week starting: 1970-01-12
-2025-03-25 05:17:28,060 - __main__ - INFO - Checking completeness for week: 1970-01-12 to 1970-01-18
-2025-03-25 05:17:28,061 - __main__ - WARNING - Week 1970-01-12 to 1970-01-18 has less than 2 days of data for sensors: ['ASTa1239_Temperature', 'ASTa1241_Temperature', 'ASTa1243_Temperature', 'ASTa1250_Temperature', 'ASTa1252_Temperature', 'ASTa1257_Temperature', 'TP1152497_Temperature', 'TP1152499_Temperature', 'TP1152501_Temperature', 'TP1153137_Temperature', 'TP1153165_Temperature', 'VAS1000_Temperature', 'VAS1001_Temperature', 'VAS1002_Temperature', 'VAST1239_Temperature']
-2025-03-25 05:17:28,061 - __main__ - WARNING - No sensors have at least 2 days of data for week 1970-01-12 to 1970-01-18
-2025-03-25 05:17:28,061 - __main__ - WARNING - Skipping incomplete temperature data for week starting 1970-01-12
-2025-03-25 05:17:28,061 - __main__ - INFO - Processing complete
-2025-03-25 05:18:28,152 - __main__ - INFO - Last processed week: 2000-01-01
-2025-03-25 05:18:28,152 - __main__ - INFO - Processing data up to week starting: 2025-03-17
-2025-03-25 05:18:28,152 - __main__ - INFO - Initializing database at /Users/hamza/Desktop/Pavement Performance - Sagun/pavement_data/database/pavement_data.db
-2025-03-25 05:18:28,153 - __main__ - INFO - Database initialized
-2025-03-25 05:18:28,153 - __main__ - INFO - Reading temperature daily data files
-2025-03-25 05:18:28,153 - __main__ - INFO - Processing all data regardless of last processed week
-2025-03-25 05:18:28,153 - __main__ - INFO - Reading file: /Users/hamza/Desktop/Pavement Performance - Sagun/pavement_data/processed/daily/temperature_daily_20250325.csv
-2025-03-25 05:18:28,154 - __main__ - INFO - Found 15 rows of data in file
-2025-03-25 05:18:28,155 - __main__ - INFO - Total temperature data to process: 15 rows
-2025-03-25 05:18:28,155 - __main__ - INFO - Week range: 1970-01-12 00:00:00 to 1970-01-12 00:00:00
-2025-03-25 05:18:28,155 - __main__ - INFO - Reading weather daily data files
-2025-03-25 05:18:28,155 - __main__ - INFO - Processing all data regardless of last processed week
-2025-03-25 05:18:28,156 - __main__ - WARNING - No weather daily data files found
-2025-03-25 05:18:28,156 - __main__ - INFO - Processing week starting: 1970-01-12
-2025-03-25 05:18:28,156 - __main__ - INFO - Checking completeness for week: 1970-01-12 to 1970-01-18
-2025-03-25 05:18:28,157 - __main__ - INFO - Found 15 sensors with at least 1 days of data
-2025-03-25 05:18:28,157 - __main__ - INFO - Aggregating data to weekly intervals for 1970-01-12 00:00:00
-2025-03-25 05:18:28,157 - __main__ - INFO - Processing sensor: ASTa1239_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,158 - __main__ - INFO - Processing sensor: ASTa1241_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,158 - __main__ - INFO - Processing sensor: ASTa1243_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,158 - __main__ - INFO - Processing sensor: ASTa1250_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,158 - __main__ - INFO - Processing sensor: ASTa1252_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,158 - __main__ - INFO - Processing sensor: ASTa1257_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,159 - __main__ - INFO - Processing sensor: TP1152497_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,159 - __main__ - INFO - Processing sensor: TP1152499_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,159 - __main__ - INFO - Processing sensor: TP1152501_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,159 - __main__ - INFO - Processing sensor: TP1153137_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,159 - __main__ - INFO - Processing sensor: TP1153165_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,159 - __main__ - INFO - Processing sensor: VAS1000_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,160 - __main__ - INFO - Processing sensor: VAS1001_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,160 - __main__ - INFO - Processing sensor: VAS1002_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,160 - __main__ - INFO - Processing sensor: VAST1239_Temperature for week starting 1970-01-12
-2025-03-25 05:18:28,161 - __main__ - INFO - Weekly temperature aggregates for week starting 1970-01-12:
-2025-03-25 05:18:28,161 - __main__ - INFO - Total records: 15
-2025-03-25 05:18:28,161 - __main__ - INFO - Summary - Avg Mean: 27.09°C, Avg Min: 21.15°C, Avg Max: 30.44°C, Avg Range: 9.29°C, Total Readings: 3117505
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: ASTa1239_Temperature, Mean: 23.98°C, Min: 23.08°C, Max: 24.62°C, Range: 1.54°C, StdDev: 0.31, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: ASTa1241_Temperature, Mean: 24.47°C, Min: 23.93°C, Max: 24.84°C, Range: 0.91°C, StdDev: 0.22, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: ASTa1243_Temperature, Mean: 24.94°C, Min: 24.81°C, Max: 25.08°C, Range: 0.27°C, StdDev: 0.04, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: ASTa1250_Temperature, Mean: 23.09°C, Min: 21.96°C, Max: 23.94°C, Range: 1.99°C, StdDev: 0.54, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: ASTa1252_Temperature, Mean: 92.73°C, Min: 19.98°C, Max: 99.64°C, Range: 79.66°C, StdDev: 9.28, Count: 109802
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: ASTa1257_Temperature, Mean: -48.67°C, Min: -51.64°C, Max: -18.85°C, Range: 32.79°C, StdDev: 2.52, Count: 199716
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: TP1152497_Temperature, Mean: 25.80°C, Min: 23.51°C, Max: 27.96°C, Range: 4.45°C, StdDev: 1.02, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: TP1152499_Temperature, Mean: 25.73°C, Min: 25.21°C, Max: 26.53°C, Range: 1.32°C, StdDev: 0.23, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: TP1152501_Temperature, Mean: 26.91°C, Min: 24.85°C, Max: 28.86°C, Range: 4.01°C, StdDev: 0.87, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: TP1153137_Temperature, Mean: 26.49°C, Min: 26.00°C, Max: 27.36°C, Range: 1.37°C, StdDev: 0.23, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: TP1153165_Temperature, Mean: 63.49°C, Min: 61.66°C, Max: 66.29°C, Range: 4.62°C, StdDev: 0.75, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: VAS1000_Temperature, Mean: 23.13°C, Min: 23.02°C, Max: 23.24°C, Range: 0.22°C, StdDev: 0.03, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: VAS1001_Temperature, Mean: 25.69°C, Min: 24.74°C, Max: 26.43°C, Range: 1.69°C, StdDev: 0.47, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: VAS1002_Temperature, Mean: 23.20°C, Min: 21.82°C, Max: 24.27°C, Range: 2.45°C, StdDev: 0.58, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Sensor: VAST1239_Temperature, Mean: 25.37°C, Min: 24.25°C, Max: 26.36°C, Range: 2.11°C, StdDev: 0.49, Count: 215999
-2025-03-25 05:18:28,162 - __main__ - INFO - Processing complete
-2025-03-25 05:21:04,160 - __main__ - INFO - Last processed week: 2000-01-01
-2025-03-25 05:21:04,161 - __main__ - INFO - Processing data up to week starting: 2025-03-17
-2025-03-25 05:21:04,161 - __main__ - INFO - Initializing database at /Users/hamza/Desktop/Pavement Performance - Sagun/pavement_data/database/pavement_data.db
-2025-03-25 05:21:04,163 - __main__ - INFO - Database initialized
-2025-03-25 05:21:04,163 - __main__ - INFO - Reading temperature daily data files
-2025-03-25 05:21:04,163 - __main__ - INFO - Processing all data regardless of last processed week
-2025-03-25 05:21:04,163 - __main__ - INFO - Reading file: /Users/hamza/Desktop/Pavement Performance - Sagun/pavement_data/processed/daily/temperature_daily_20250325.csv
-2025-03-25 05:21:04,166 - __main__ - INFO - Found 15 rows of data in file
-2025-03-25 05:21:04,166 - __main__ - INFO - Total temperature data to process: 15 rows
-2025-03-25 05:21:04,167 - __main__ - INFO - Week range: 1970-01-12 00:00:00 to 1970-01-12 00:00:00
-2025-03-25 05:21:04,167 - __main__ - INFO - Reading weather daily data files
-2025-03-25 05:21:04,167 - __main__ - INFO - Processing all data regardless of last processed week
-2025-03-25 05:21:04,167 - __main__ - WARNING - No weather daily data files found
-2025-03-25 05:21:04,167 - __main__ - INFO - Processing week starting: 1970-01-12
-2025-03-25 05:21:04,167 - __main__ - INFO - Checking completeness for week: 1970-01-12 to 1970-01-18
-2025-03-25 05:21:04,168 - __main__ - INFO - Found 15 sensors with at least 1 days of data
-2025-03-25 05:21:04,168 - __main__ - INFO - Aggregating data to weekly intervals for 1970-01-12 00:00:00
-2025-03-25 05:21:04,169 - __main__ - INFO - Processing sensor: ASTa1239_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,169 - __main__ - INFO - Processing sensor: ASTa1241_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,169 - __main__ - INFO - Processing sensor: ASTa1243_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,169 - __main__ - INFO - Processing sensor: ASTa1250_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,170 - __main__ - INFO - Processing sensor: ASTa1252_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,170 - __main__ - INFO - Processing sensor: ASTa1257_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,170 - __main__ - INFO - Processing sensor: TP1152497_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,170 - __main__ - INFO - Processing sensor: TP1152499_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,170 - __main__ - INFO - Processing sensor: TP1152501_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,170 - __main__ - INFO - Processing sensor: TP1153137_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,170 - __main__ - INFO - Processing sensor: TP1153165_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,171 - __main__ - INFO - Processing sensor: VAS1000_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,171 - __main__ - INFO - Processing sensor: VAS1001_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,171 - __main__ - INFO - Processing sensor: VAS1002_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,171 - __main__ - INFO - Processing sensor: VAST1239_Temperature for week starting 1970-01-12
-2025-03-25 05:21:04,172 - __main__ - INFO - Weekly temperature aggregates for week starting 1970-01-12:
-2025-03-25 05:21:04,172 - __main__ - INFO - Total records: 15
-2025-03-25 05:21:04,172 - __main__ - INFO - Summary - Avg Mean: 27.09°C, Avg Min: 21.15°C, Avg Max: 30.44°C, Avg Range: 9.29°C, Total Readings: 3117505
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: ASTa1239_Temperature, Mean: 23.98°C, Min: 23.08°C, Max: 24.62°C, Range: 1.54°C, StdDev: 0.31, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: ASTa1241_Temperature, Mean: 24.47°C, Min: 23.93°C, Max: 24.84°C, Range: 0.91°C, StdDev: 0.22, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: ASTa1243_Temperature, Mean: 24.94°C, Min: 24.81°C, Max: 25.08°C, Range: 0.27°C, StdDev: 0.04, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: ASTa1250_Temperature, Mean: 23.09°C, Min: 21.96°C, Max: 23.94°C, Range: 1.99°C, StdDev: 0.54, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: ASTa1252_Temperature, Mean: 92.73°C, Min: 19.98°C, Max: 99.64°C, Range: 79.66°C, StdDev: 9.28, Count: 109802
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: ASTa1257_Temperature, Mean: -48.67°C, Min: -51.64°C, Max: -18.85°C, Range: 32.79°C, StdDev: 2.52, Count: 199716
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: TP1152497_Temperature, Mean: 25.80°C, Min: 23.51°C, Max: 27.96°C, Range: 4.45°C, StdDev: 1.02, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: TP1152499_Temperature, Mean: 25.73°C, Min: 25.21°C, Max: 26.53°C, Range: 1.32°C, StdDev: 0.23, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: TP1152501_Temperature, Mean: 26.91°C, Min: 24.85°C, Max: 28.86°C, Range: 4.01°C, StdDev: 0.87, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: TP1153137_Temperature, Mean: 26.49°C, Min: 26.00°C, Max: 27.36°C, Range: 1.37°C, StdDev: 0.23, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: TP1153165_Temperature, Mean: 63.49°C, Min: 61.66°C, Max: 66.29°C, Range: 4.62°C, StdDev: 0.75, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: VAS1000_Temperature, Mean: 23.13°C, Min: 23.02°C, Max: 23.24°C, Range: 0.22°C, StdDev: 0.03, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: VAS1001_Temperature, Mean: 25.69°C, Min: 24.74°C, Max: 26.43°C, Range: 1.69°C, StdDev: 0.47, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: VAS1002_Temperature, Mean: 23.20°C, Min: 21.82°C, Max: 24.27°C, Range: 2.45°C, StdDev: 0.58, Count: 215999
-2025-03-25 05:21:04,173 - __main__ - INFO - Sensor: VAST1239_Temperature, Mean: 25.37°C, Min: 24.25°C, Max: 26.36°C, Range: 2.11°C, StdDev: 0.49, Count: 215999
-2025-03-25 05:21:04,174 - __main__ - INFO - Filtered out 0 rows with null values, zeros, or invalid data
-2025-03-25 05:21:04,174 - __main__ - INFO - Saved 15 valid temperature data rows to /Users/hamza/Desktop/Pavement Performance - Sagun/pavement_data/processed/weekly/temperature_weekly_20250325.csv
-2025-03-25 05:21:04,175 - __main__ - INFO - Processing complete
+2025-03-26 14:15:15,822 - __main__ - INFO - Last processed week: 2000-01-01
+2025-03-26 14:15:15,822 - __main__ - INFO - Processing data up to week starting: 2025-03-17
+2025-03-26 14:15:15,822 - __main__ - INFO - Initializing database at /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/database/pavement_data.db
+2025-03-26 14:15:15,830 - __main__ - INFO - Database initialized
+2025-03-26 14:15:15,830 - __main__ - INFO - Reading temperature daily data files
+2025-03-26 14:15:15,830 - __main__ - INFO - Processing all data regardless of last processed week
+2025-03-26 14:15:15,830 - __main__ - INFO - Reading file: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/daily/temperature_daily_20250326.csv
+2025-03-26 14:15:15,832 - __main__ - INFO - Found 15 rows of data in file
+2025-03-26 14:15:15,832 - __main__ - INFO - Total temperature data to process: 15 rows
+2025-03-26 14:15:15,833 - __main__ - INFO - Week range: 1970-01-12 00:00:00 to 1970-01-12 00:00:00
+2025-03-26 14:15:15,833 - __main__ - INFO - Reading weather daily data files
+2025-03-26 14:15:15,833 - __main__ - INFO - Processing all data regardless of last processed week
+2025-03-26 14:15:15,833 - __main__ - WARNING - No weather daily data files found
+2025-03-26 14:15:15,833 - __main__ - INFO - Processing week starting: 1970-01-12
+2025-03-26 14:15:15,833 - __main__ - INFO - Checking completeness for week: 1970-01-12 to 1970-01-18
+2025-03-26 14:15:15,834 - __main__ - INFO - Found 15 sensors with at least 1 days of data
+2025-03-26 14:15:15,834 - __main__ - INFO - Aggregating data to weekly intervals for 1970-01-12 00:00:00
+2025-03-26 14:15:15,835 - __main__ - INFO - Processing sensor: ASTa1239_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,836 - __main__ - INFO - Processing sensor: ASTa1241_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,836 - __main__ - INFO - Processing sensor: ASTa1243_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,836 - __main__ - INFO - Processing sensor: ASTa1250_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,836 - __main__ - INFO - Processing sensor: ASTa1252_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,837 - __main__ - INFO - Processing sensor: ASTa1257_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,837 - __main__ - INFO - Processing sensor: TP1152497_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,837 - __main__ - INFO - Processing sensor: TP1152499_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,837 - __main__ - INFO - Processing sensor: TP1152501_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,837 - __main__ - INFO - Processing sensor: TP1153137_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,838 - __main__ - INFO - Processing sensor: TP1153165_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,838 - __main__ - INFO - Processing sensor: VAS1000_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,838 - __main__ - INFO - Processing sensor: VAS1001_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,838 - __main__ - INFO - Processing sensor: VAS1002_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,838 - __main__ - INFO - Processing sensor: VAST1239_Temperature for week starting 1970-01-12
+2025-03-26 14:15:15,839 - __main__ - INFO - Weekly temperature aggregates for week starting 1970-01-12:
+2025-03-26 14:15:15,839 - __main__ - INFO - Total records: 15
+2025-03-26 14:15:15,839 - __main__ - INFO - Summary - Avg Mean: 27.09°C, Avg Min: 21.15°C, Avg Max: 30.44°C, Avg Range: 9.29°C, Total Readings: 3117505
+2025-03-26 14:15:15,840 - __main__ - INFO - Sensor: ASTa1239_Temperature, Mean: 23.98°C, Min: 23.08°C, Max: 24.62°C, Range: 1.54°C, StdDev: 0.31, Count: 215999
+2025-03-26 14:15:15,840 - __main__ - INFO - Sensor: ASTa1241_Temperature, Mean: 24.47°C, Min: 23.93°C, Max: 24.84°C, Range: 0.91°C, StdDev: 0.22, Count: 215999
+2025-03-26 14:15:15,840 - __main__ - INFO - Sensor: ASTa1243_Temperature, Mean: 24.94°C, Min: 24.81°C, Max: 25.08°C, Range: 0.27°C, StdDev: 0.04, Count: 215999
+2025-03-26 14:15:15,840 - __main__ - INFO - Sensor: ASTa1250_Temperature, Mean: 23.09°C, Min: 21.96°C, Max: 23.94°C, Range: 1.99°C, StdDev: 0.54, Count: 215999
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: ASTa1252_Temperature, Mean: 92.73°C, Min: 19.98°C, Max: 99.64°C, Range: 79.66°C, StdDev: 9.28, Count: 109802
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: ASTa1257_Temperature, Mean: -48.67°C, Min: -51.64°C, Max: -18.85°C, Range: 32.79°C, StdDev: 2.52, Count: 199716
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: TP1152497_Temperature, Mean: 25.80°C, Min: 23.51°C, Max: 27.96°C, Range: 4.45°C, StdDev: 1.02, Count: 215999
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: TP1152499_Temperature, Mean: 25.73°C, Min: 25.21°C, Max: 26.53°C, Range: 1.32°C, StdDev: 0.23, Count: 215999
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: TP1152501_Temperature, Mean: 26.91°C, Min: 24.85°C, Max: 28.86°C, Range: 4.01°C, StdDev: 0.87, Count: 215999
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: TP1153137_Temperature, Mean: 26.49°C, Min: 26.00°C, Max: 27.36°C, Range: 1.37°C, StdDev: 0.23, Count: 215999
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: TP1153165_Temperature, Mean: 63.49°C, Min: 61.66°C, Max: 66.29°C, Range: 4.62°C, StdDev: 0.75, Count: 215999
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: VAS1000_Temperature, Mean: 23.13°C, Min: 23.02°C, Max: 23.24°C, Range: 0.22°C, StdDev: 0.03, Count: 215999
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: VAS1001_Temperature, Mean: 25.69°C, Min: 24.74°C, Max: 26.43°C, Range: 1.69°C, StdDev: 0.47, Count: 215999
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: VAS1002_Temperature, Mean: 23.20°C, Min: 21.82°C, Max: 24.27°C, Range: 2.45°C, StdDev: 0.58, Count: 215999
+2025-03-26 14:15:15,841 - __main__ - INFO - Sensor: VAST1239_Temperature, Mean: 25.37°C, Min: 24.25°C, Max: 26.36°C, Range: 2.11°C, StdDev: 0.49, Count: 215999
+2025-03-26 14:15:15,842 - __main__ - INFO - Filtered out 0 rows with null values, zeros, or invalid data
+2025-03-26 14:15:15,843 - __main__ - INFO - Saved 15 valid temperature data rows to /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/weekly/temperature_weekly_20250326.csv
+2025-03-26 14:15:15,843 - __main__ - INFO - Processing complete

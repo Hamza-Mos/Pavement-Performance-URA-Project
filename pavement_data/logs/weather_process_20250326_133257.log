@@ -1,8 +1,0 @@
-Starting weather data processing at Wed 26 Mar 2025 13:32:57 EDT
-Input path: ../weather_data/weatherstats_kitchenerwaterloo_hourly.csv
-Running weather station data processing...
-Traceback (most recent call last):
-  File "/Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/scripts/weather_station_processor.py", line 32, in <module>
-    import pandas as pd
-ModuleNotFoundError: No module named 'pandas'
-Error: Weather data processing failed. See log for details.

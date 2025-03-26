@@ -1,5 +1,0 @@
-Starting weather data processing at Wed 26 Mar 2025 13:32:09 EDT
-Input path: ../weather_data/weatherstats_kitchenerwaterloo_hourly.csv
-Running weather station data processing...
-./process_weather.sh: line 66: python: command not found
-Error: Weather data processing failed. See log for details.

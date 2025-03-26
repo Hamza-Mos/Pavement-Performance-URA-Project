@@ -1,5 +1,6 @@
 *.tdms
 *.csv
+*.log
 
 # Python
 __pycache__/

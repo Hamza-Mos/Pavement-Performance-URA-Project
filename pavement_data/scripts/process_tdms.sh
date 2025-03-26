@@ -34,7 +34,7 @@ fi
 # Set up directories
 # Use absolute paths to avoid confusion
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+BASE_DIR="/Users/hamza/Desktop/Pavement Performance URA Project/pavement_data"
 RAW_DIR="$BASE_DIR/raw"
 OUTPUT_DIR="$BASE_DIR/processed"
 LOG_DIR="$BASE_DIR/logs"
@@ -65,7 +65,7 @@ echo "Input file: $TDMS_FILE" >> "$LOG_FILE"
 # Run the 15-minute aggregation
 echo "Running 15-minute aggregation..."
 echo "Running 15-minute aggregation..." >> "$LOG_FILE"
-cd "$SCRIPT_DIR" && python temp_weather_15min.py --input-file "$RAW_DIR/$FILENAME" --output-dir "$OUTPUT_DIR" >> "$LOG_FILE" 2>&1
+cd "$SCRIPT_DIR" && python3 temp_weather_15min.py --input-file "$RAW_DIR/$FILENAME" --output-dir "$OUTPUT_DIR" >> "$LOG_FILE" 2>&1
 
 # Check if the previous command was successful
 if [ $? -ne 0 ]; then
@@ -77,7 +77,7 @@ fi
 # Run the hourly aggregation
 echo "Running hourly aggregation..."
 echo "Running hourly aggregation..." >> "$LOG_FILE"
-cd "$SCRIPT_DIR" && python temp_weather_hourly.py --input-dir "$OUTPUT_DIR/15min" --output-dir "$OUTPUT_DIR" >> "$LOG_FILE" 2>&1
+cd "$SCRIPT_DIR" && python3 temp_weather_hourly.py --input-dir "$OUTPUT_DIR/15min" --output-dir "$OUTPUT_DIR" >> "$LOG_FILE" 2>&1
 
 # Check if the previous command was successful
 if [ $? -ne 0 ]; then
@@ -89,7 +89,7 @@ fi
 # Run the daily aggregation
 echo "Running daily aggregation..."
 echo "Running daily aggregation..." >> "$LOG_FILE"
-cd "$SCRIPT_DIR" && python temp_weather_daily.py --input-dir "$OUTPUT_DIR/hourly" --output-dir "$OUTPUT_DIR" >> "$LOG_FILE" 2>&1
+cd "$SCRIPT_DIR" && python3 temp_weather_daily.py --input-dir "$OUTPUT_DIR/hourly" --output-dir "$OUTPUT_DIR" >> "$LOG_FILE" 2>&1
 
 # Check if the previous command was successful
 if [ $? -ne 0 ]; then
@@ -101,7 +101,7 @@ fi
 # Run the weekly aggregation and database update
 echo "Running weekly aggregation and database update..."
 echo "Running weekly aggregation and database update..." >> "$LOG_FILE"
-cd "$SCRIPT_DIR" && python temp_weather_weekly.py --input-dir "$OUTPUT_DIR/daily" --db-path "$DB_DIR/pavement_data.db" >> "$LOG_FILE" 2>&1
+cd "$SCRIPT_DIR" && python3 temp_weather_weekly.py --input-dir "$OUTPUT_DIR/daily" --db-path "$DB_DIR/pavement_data.db" >> "$LOG_FILE" 2>&1
 
 # Check if the previous command was successful
 if [ $? -ne 0 ]; then
