@@ -1,0 +1,12 @@
+Starting weather data processing at Wed 26 Mar 2025 13:33:54 EDT
+Input path: ../weather_data/weatherstats_kitchenerwaterloo_hourly.csv
+Running weather station data processing...
+2025-03-26 13:34:00,626 - __main__ - INFO - Last processed time: 2000-01-01 00:00:00
+2025-03-26 13:34:00,627 - __main__ - INFO - Reading weather station data from: ../weather_data/weatherstats_kitchenerwaterloo_hourly.csv
+/Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/scripts/weather_station_processor.py:121: FutureWarning: Parsing 'EDT' as tzlocal (dependent on system timezone) is deprecated and will raise in a future version. Pass the 'tz' keyword or call tz_localize after construction instead
+  df['timestamp'] = pd.to_datetime(df['date_time_local'])
+/Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/scripts/weather_station_processor.py:121: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  df['timestamp'] = pd.to_datetime(df['date_time_local'])
+2025-03-26 13:34:00,656 - __main__ - ERROR - Error reading weather CSV file: 'NoneType' object has no attribute 'total_seconds'
+2025-03-26 13:34:00,656 - __main__ - ERROR - No weather data to process
+Processing completed successfully at Wed 26 Mar 2025 13:34:00 EDT

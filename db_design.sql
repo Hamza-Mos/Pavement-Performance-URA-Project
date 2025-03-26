@@ -65,24 +65,34 @@ CREATE TABLE RawTemperatureData (
 CREATE INDEX idx_temp_timestamp ON RawTemperatureData(Timestamp DESC);
 CREATE INDEX idx_temp_sensor_time ON RawTemperatureData(SensorID, Timestamp DESC);
 
--- Weather Data Table (Time Series)
--- Stores raw weather readings
-CREATE TABLE WeatherData (
-    WeatherID BIGINT PRIMARY KEY AUTOINCREMENT,
+-- Raw Weather Station Data Table (Time Series)
+-- Stores data from external weather stations
+CREATE TABLE RawWeatherStationData (
+    ReadingID BIGINT PRIMARY KEY AUTOINCREMENT,
     Timestamp TIMESTAMP NOT NULL,  -- Primary time dimension
-    AirTemperature DECIMAL(5,2),
-    RelativeHumidity DECIMAL(5,2),
-    Precipitation DECIMAL(6,2),
-    WindSpeed DECIMAL(5,2),
-    WindDirection VARCHAR(10),
-    BarometricPressure DECIMAL(6,2),
-    SolarRadiation DECIMAL(7,2),
-    DataSource VARCHAR(50),
+    Temperature DECIMAL(5,2),      -- Air temperature in degrees Celsius
+    DewPoint DECIMAL(5,2),         -- Dew point in degrees Celsius
+    RelativeHumidity DECIMAL(5,2), -- Percentage
+    PressureStation DECIMAL(6,2),  -- Station pressure in kPa
+    PressureSea DECIMAL(6,2),      -- Sea level pressure in kPa
+    WindDirection VARCHAR(10),     -- Wind direction (e.g., N, NE, E, SE, S, SW, W, NW)
+    WindDirectionDegrees INTEGER,  -- Wind direction in degrees
+    WindSpeed DECIMAL(5,2),        -- In km/h
+    WindGust DECIMAL(5,2),         -- Maximum wind gust in km/h
+    Windchill DECIMAL(5,2),        -- Windchill in degrees Celsius
+    Humidex DECIMAL(5,2),          -- Humidex value
+    Visibility DECIMAL(7,2),       -- Visibility in meters
+    HealthIndex DECIMAL(5,2),      -- Health index value if available
+    CloudCover DECIMAL(5,2),       -- Cloud cover percentage
+    SolarRadiation DECIMAL(7,2),   -- In W/m²
+    MaxTempPastHour DECIMAL(5,2),  -- Maximum temperature in past hour
+    MinTempPastHour DECIMAL(5,2),  -- Minimum temperature in past hour
+    DataSource VARCHAR(50),        -- Source of weather data (station name/ID)
     RecordedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- CREATE HYPERTABLE WeatherData(Timestamp);
-CREATE INDEX idx_weather_timestamp ON WeatherData(Timestamp DESC);
+-- CREATE HYPERTABLE RawWeatherStationData(Timestamp);
+CREATE INDEX idx_raw_weather_timestamp ON RawWeatherStationData(Timestamp DESC);
 
 -- Strain Data Table (Time Series)
 CREATE TABLE StrainData (
@@ -215,86 +225,80 @@ CREATE TABLE TempDataWeekly (
 CREATE INDEX idx_tempweekly_timestamp ON TempDataWeekly(Timestamp DESC);
 CREATE INDEX idx_tempweekly_sensor_time ON TempDataWeekly(SensorID, Timestamp DESC);
 
+-- 15-Minute Aggregated Weather Data (Time Series)
+CREATE TABLE WeatherData15Min (
+    AggregateID BIGINT PRIMARY KEY AUTOINCREMENT,
+    Timestamp TIMESTAMP NOT NULL,  -- Start of 15-minute interval
+    MetricName VARCHAR(30) NOT NULL, -- Type of weather measurement (temperature, humidity, etc.)
+    MeanValue DECIMAL(9,2) NOT NULL,
+    MinValue DECIMAL(9,2) NOT NULL,
+    MaxValue DECIMAL(9,2) NOT NULL,
+    StdDevValue DECIMAL(9,2) NOT NULL,
+    ReadingCount INTEGER NOT NULL,
+    ProcessedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (Timestamp, MetricName)
+);
+
+-- CREATE HYPERTABLE WeatherData15Min(Timestamp);
+CREATE INDEX idx_weather15min_timestamp ON WeatherData15Min(Timestamp DESC);
+CREATE INDEX idx_weather15min_metric_time ON WeatherData15Min(MetricName, Timestamp DESC);
+
 -- Hourly Aggregated Weather Data (Time Series)
 CREATE TABLE WeatherDataHourly (
     AggregateID BIGINT PRIMARY KEY AUTOINCREMENT,
     Timestamp TIMESTAMP NOT NULL,  -- Start of hourly interval
-    MeanAirTemp DECIMAL(5,2),
-    MinAirTemp DECIMAL(5,2),
-    MaxAirTemp DECIMAL(5,2),
-    StdDevAirTemp DECIMAL(5,2),
-    MeanHumidity DECIMAL(5,2),
-    TotalPrecipitation DECIMAL(6,2),
-    MeanWindSpeed DECIMAL(5,2),
-    MaxWindSpeed DECIMAL(5,2),
-    PredominantWindDirection VARCHAR(10),
-    MeanBarometricPressure DECIMAL(6,2),
-    MeanSolarRadiation DECIMAL(7,2),
+    MetricName VARCHAR(30) NOT NULL, -- Type of weather measurement (temperature, humidity, etc.)
+    MeanValue DECIMAL(9,2) NOT NULL,
+    MinValue DECIMAL(9,2) NOT NULL,
+    MaxValue DECIMAL(9,2) NOT NULL,
+    StdDevValue DECIMAL(9,2) NOT NULL,
     ReadingCount INTEGER NOT NULL,
-    IntervalEnd TIMESTAMP NOT NULL, -- End of hourly interval
     ProcessedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (Timestamp)
+    UNIQUE (Timestamp, MetricName)
 );
 
 -- CREATE HYPERTABLE WeatherDataHourly(Timestamp);
 CREATE INDEX idx_weatherhourly_timestamp ON WeatherDataHourly(Timestamp DESC);
+CREATE INDEX idx_weatherhourly_metric_time ON WeatherDataHourly(MetricName, Timestamp DESC);
 
 -- Daily Aggregated Weather Data (Time Series)
 CREATE TABLE WeatherDataDaily (
     AggregateID BIGINT PRIMARY KEY AUTOINCREMENT,
-    Timestamp TIMESTAMP NOT NULL,  -- Start of day (midnight)
-    MeanAirTemp DECIMAL(5,2),
-    MinAirTemp DECIMAL(5,2),
-    MaxAirTemp DECIMAL(5,2),
-    StdDevAirTemp DECIMAL(5,2),
-    AirTempRange DECIMAL(5,2),
-    MeanHumidity DECIMAL(5,2),
-    MinHumidity DECIMAL(5,2),
-    MaxHumidity DECIMAL(5,2),
-    TotalPrecipitation DECIMAL(6,2),
-    MeanWindSpeed DECIMAL(5,2),
-    MaxWindSpeed DECIMAL(5,2),
-    PredominantWindDirection VARCHAR(10),
-    MeanBarometricPressure DECIMAL(6,2),
-    MeanSolarRadiation DECIMAL(7,2),
-    PrecipitationHours INTEGER,    -- Hours with precipitation
+    Date DATE NOT NULL,  -- Date of the daily aggregate
+    MetricName VARCHAR(30) NOT NULL, -- Type of weather measurement (temperature, humidity, etc.)
+    MeanValue DECIMAL(9,2) NOT NULL,
+    MinValue DECIMAL(9,2) NOT NULL,
+    MaxValue DECIMAL(9,2) NOT NULL,
+    StdDevValue DECIMAL(9,2) NOT NULL,
+    ValueRange DECIMAL(9,2) NOT NULL, -- Max - Min value for the day
     ReadingCount INTEGER NOT NULL,
-    IntervalEnd TIMESTAMP NOT NULL, -- End of day
     ProcessedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (Timestamp)
+    UNIQUE (Date, MetricName)
 );
 
--- CREATE HYPERTABLE WeatherDataDaily(Timestamp);
-CREATE INDEX idx_weatherdaily_timestamp ON WeatherDataDaily(Timestamp DESC);
+-- CREATE HYPERTABLE WeatherDataDaily(Date);
+CREATE INDEX idx_weatherdaily_date ON WeatherDataDaily(Date DESC);
+CREATE INDEX idx_weatherdaily_metric_date ON WeatherDataDaily(MetricName, Date DESC);
 
 -- Weekly Aggregated Weather Data (Time Series)
 CREATE TABLE WeatherDataWeekly (
     AggregateID BIGINT PRIMARY KEY AUTOINCREMENT,
-    Timestamp TIMESTAMP NOT NULL,  -- Start of week (Monday)
-    MeanAirTemp DECIMAL(5,2),
-    MinAirTemp DECIMAL(5,2),
-    MaxAirTemp DECIMAL(5,2),
-    StdDevAirTemp DECIMAL(5,2),
-    AirTempRange DECIMAL(5,2),
-    MeanHumidity DECIMAL(5,2),
-    MinHumidity DECIMAL(5,2),
-    MaxHumidity DECIMAL(5,2),
-    TotalPrecipitation DECIMAL(6,2),
-    MeanWindSpeed DECIMAL(5,2),
-    MaxWindSpeed DECIMAL(5,2),
-    PredominantWindDirection VARCHAR(10),
-    MeanBarometricPressure DECIMAL(6,2),
-    MeanSolarRadiation DECIMAL(7,2),
-    RainyDays INTEGER,             -- Days with precipitation > 0.5mm
-    SunnyHours DECIMAL(5,1),       -- Total hours with significant solar radiation
+    WeekStart DATE NOT NULL,  -- Start date of the week (Monday)
+    WeekEnd DATE NOT NULL,    -- End date of the week (Sunday)
+    MetricName VARCHAR(30) NOT NULL, -- Type of weather measurement (temperature, humidity, etc.)
+    MeanValue DECIMAL(9,2) NOT NULL,
+    MinValue DECIMAL(9,2) NOT NULL,
+    MaxValue DECIMAL(9,2) NOT NULL,
+    StdDevValue DECIMAL(9,2) NOT NULL,
+    ValueRange DECIMAL(9,2) NOT NULL, -- Max - Min value for the week
     ReadingCount INTEGER NOT NULL,
-    IntervalEnd TIMESTAMP NOT NULL, -- End of week (Sunday)
     ProcessedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (Timestamp)
+    UNIQUE (WeekStart, MetricName)
 );
 
--- CREATE HYPERTABLE WeatherDataWeekly(Timestamp);
-CREATE INDEX idx_weatherweekly_timestamp ON WeatherDataWeekly(Timestamp DESC);
+-- CREATE HYPERTABLE WeatherDataWeekly(WeekStart);
+CREATE INDEX idx_weatherweekly_weekstart ON WeatherDataWeekly(WeekStart DESC);
+CREATE INDEX idx_weatherweekly_metric_week ON WeatherDataWeekly(MetricName, WeekStart DESC);
 
 -- Temperature Gradient Analysis (Time Series)
 -- For analyzing temperature variations across pavement layers
@@ -406,48 +410,45 @@ WHERE s.SensorType = 'TEMPERATURE'
 AND t.Timestamp = (SELECT MAX(Timestamp) FROM TempDataHourly)
 ORDER BY s.Depth;
 
--- View: Weekly temperature trends
-CREATE VIEW WeeklyTemperatureTrends AS
+-- View: Current weather metrics
+CREATE VIEW CurrentWeatherMetrics AS
 SELECT 
-    w.Timestamp as WeekStart,
-    w.IntervalEnd as WeekEnd,
-    w.MeanAirTemp as AirTemperature,
-    asphalt.MeanValue as AsphaltTemperature,
-    base.MeanValue as BaseTemperature,
-    subbase.MeanValue as SubbaseTemperature,
-    subgrade.MeanValue as SubgradeTemperature,
-    w.TotalPrecipitation,
-    w.MeanHumidity
-FROM WeatherDataWeekly w
-LEFT JOIN (
-    SELECT Timestamp, AVG(MeanValue) as MeanValue
-    FROM TempDataWeekly t
-    JOIN SensorInformation s ON t.SensorID = s.SensorID
-    WHERE s.LayerType = 'ASPHALT'
-    GROUP BY Timestamp
-) asphalt ON w.Timestamp = asphalt.Timestamp
-LEFT JOIN (
-    SELECT Timestamp, AVG(MeanValue) as MeanValue
-    FROM TempDataWeekly t
-    JOIN SensorInformation s ON t.SensorID = s.SensorID
-    WHERE s.LayerType = 'BASE'
-    GROUP BY Timestamp
-) base ON w.Timestamp = base.Timestamp
-LEFT JOIN (
-    SELECT Timestamp, AVG(MeanValue) as MeanValue
-    FROM TempDataWeekly t
-    JOIN SensorInformation s ON t.SensorID = s.SensorID
-    WHERE s.LayerType = 'SUBBASE'
-    GROUP BY Timestamp
-) subbase ON w.Timestamp = subbase.Timestamp
-LEFT JOIN (
-    SELECT Timestamp, AVG(MeanValue) as MeanValue
-    FROM TempDataWeekly t
-    JOIN SensorInformation s ON t.SensorID = s.SensorID
-    WHERE s.LayerType = 'SUBGRADE'
-    GROUP BY Timestamp
-) subgrade ON w.Timestamp = subgrade.Timestamp
-ORDER BY w.Timestamp DESC;
+    MetricName, 
+    MeanValue, 
+    MinValue, 
+    MaxValue,
+    Timestamp
+FROM 
+    WeatherDataHourly
+WHERE 
+    Timestamp = (SELECT MAX(Timestamp) FROM WeatherDataHourly)
+ORDER BY 
+    MetricName;
+
+-- View: Weekly temperature and weather correlation
+CREATE VIEW WeeklyTemperatureWeatherCorrelation AS
+SELECT 
+    temp.Timestamp as WeekStart,
+    temp.IntervalEnd as WeekEnd,
+    temp.SensorID,
+    temp.LayerType, 
+    temp.Depth,
+    temp.MeanValue as AvgTemperature,
+    temp.MinValue as MinTemperature,
+    temp.MaxValue as MaxTemperature,
+    air_temp.MeanValue as AvgAirTemperature,
+    humidity.MeanValue as AvgHumidity,
+    solar.MeanValue as AvgSolarRadiation
+FROM 
+    TempDataWeekly temp
+LEFT JOIN 
+    WeatherDataWeekly air_temp ON temp.Timestamp = air_temp.WeekStart AND air_temp.MetricName = 'temperature'
+LEFT JOIN 
+    WeatherDataWeekly humidity ON temp.Timestamp = humidity.WeekStart AND humidity.MetricName = 'relative_humidity'
+LEFT JOIN 
+    WeatherDataWeekly solar ON temp.Timestamp = solar.WeekStart AND solar.MetricName = 'solar_radiation'
+ORDER BY 
+    temp.Timestamp DESC, temp.Depth;
 
 -- Sample time-series queries
 
@@ -484,27 +485,17 @@ ORDER BY w.Timestamp DESC;
 -- GROUP BY t.Timestamp
 -- ORDER BY t.Timestamp;
 
--- 4. Find temperature anomalies (values outside normal range)
--- WITH sensor_stats AS (
---   SELECT 
---     SensorID,
---     AVG(TemperatureValue) AS avg_temp,
---     STDDEV(TemperatureValue) AS std_temp
---   FROM RawTemperatureData
---   GROUP BY SensorID
--- )
+-- 4. Weather and pavement temperature correlation
 -- SELECT 
---   r.Timestamp,
---   r.SensorID,
---   r.TemperatureValue,
---   s.avg_temp,
---   s.std_temp,
---   (r.TemperatureValue - s.avg_temp) / s.std_temp AS z_score
--- FROM RawTemperatureData r
--- JOIN sensor_stats s ON r.SensorID = s.SensorID
--- WHERE ABS((r.TemperatureValue - s.avg_temp) / s.std_temp) > 3
--- ORDER BY ABS((r.TemperatureValue - s.avg_temp) / s.std_temp) DESC;
-
--- Note: Comments for TimescaleDB specific functionality
--- To enable TimescaleDB hypertables, uncomment the CREATE HYPERTABLE lines
--- For InfluxDB, different syntax would be needed in an InfluxDB-specific script
+--   DATE_TRUNC('day', t.Timestamp) as Day,
+--   AVG(t.MeanValue) as AvgPavementTemp,
+--   MAX(CASE WHEN w.MetricName = 'temperature' THEN w.MeanValue END) as AvgAirTemp,
+--   MAX(CASE WHEN w.MetricName = 'solar_radiation' THEN w.MeanValue END) as AvgSolarRadiation
+-- FROM TempDataHourly t
+-- JOIN SensorInformation s ON t.SensorID = s.SensorID
+-- JOIN WeatherDataHourly w ON DATE_TRUNC('day', t.Timestamp) = DATE_TRUNC('day', w.Timestamp)
+-- WHERE s.LayerType = 'ASPHALT' AND s.Depth < 100
+--   AND t.Timestamp BETWEEN '2023-01-01' AND '2023-01-31'
+--   AND w.MetricName IN ('temperature', 'solar_radiation')
+-- GROUP BY DATE_TRUNC('day', t.Timestamp)
+-- ORDER BY Day;

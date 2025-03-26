@@ -27,10 +27,50 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 pip install -r requirements.txt
 ```
 
-3. Run the data processing script:
+3. Data Processing:
+
+### Temperature Data Processing
+
+Process temperature data from TDMS files using the shell script wrapper:
 
 ```bash
-python temp_weather_data_processing.py
+./pavement_data/scripts/process_tdms.sh /path/to/your/file.tdms
+```
+
+This executes the full pipeline (15-min → hourly → daily → weekly) for temperature data, storing results in `processed/` directory.
+
+Or run individual aggregation scripts manually:
+
+```bash
+# Process raw temperature data to 15-minute intervals
+python pavement_data/scripts/temp_weather_15min.py --input-file /path/to/your/file.tdms --output-dir pavement_data/processed
+
+# Process 15-minute data to hourly intervals
+python pavement_data/scripts/temp_weather_hourly.py --input-dir pavement_data/processed/15min --output-dir pavement_data/processed
+
+# Process hourly data to daily intervals
+python pavement_data/scripts/temp_weather_daily.py --input-dir pavement_data/processed/hourly --output-dir pavement_data/processed
+
+# Process daily data to weekly intervals
+python pavement_data/scripts/temp_weather_weekly.py --input-dir pavement_data/processed/daily --db-path pavement_data/database/pavement_data.db
+```
+
+### Weather Station Data Processing
+
+Process external weather station data from CSV files:
+
+```bash
+./pavement_data/scripts/process_weather.sh /path/to/weather.csv
+# OR process all CSVs in a directory
+./pavement_data/scripts/process_weather.sh /directory/with/weather/csv/files
+```
+
+This processes weather station data through the same aggregation pipeline, storing results in the `processed_weather/` directory.
+
+Or run the weather station processor directly:
+
+```bash
+python pavement_data/scripts/weather_station_processor.py --input-file /path/to/weather.csv --output-dir pavement_data/processed_weather
 ```
 
 ## Requirements
