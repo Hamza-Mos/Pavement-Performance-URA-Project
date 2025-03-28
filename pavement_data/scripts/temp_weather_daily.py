@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Temperature and Weather Data Aggregator - Daily Interval
 --------------------------------------------------------
