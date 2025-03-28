@@ -28,3 +28,64 @@
 2025-03-26 14:15:15,425 - __main__ - INFO - Processing all data regardless of last processed time
 2025-03-26 14:15:15,425 - __main__ - WARNING - No weather 15-minute data files found
 2025-03-26 14:15:15,425 - __main__ - INFO - Processing complete
+2025-03-28 16:08:51,710 - __main__ - INFO - Last processed time: 2000-01-01 00:00:00
+2025-03-28 16:08:51,710 - __main__ - INFO - Processing data up to: 2025-03-28 15:00:00
+2025-03-28 16:08:51,710 - __main__ - INFO - Reading temperature 15-minute data files
+2025-03-28 16:08:51,711 - __main__ - INFO - Processing all data regardless of last processed time
+2025-03-28 16:08:51,711 - __main__ - INFO - Reading file: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min/temperature_15min_20250326.csv
+2025-03-28 16:08:51,716 - __main__ - INFO - Found 371 rows of data in file
+2025-03-28 16:08:51,718 - __main__ - INFO - Total temperature data to process: 371 rows
+2025-03-28 16:08:51,718 - __main__ - INFO - Time range: 1970-01-12 11:45:00 to 1970-01-12 17:45:00
+2025-03-28 16:08:51,719 - __main__ - INFO - Aggregating data to hourly intervals
+2025-03-28 16:08:51,719 - __main__ - INFO - Processing sensor: ASTa1239_Temperature
+2025-03-28 16:08:51,723 - __main__ - INFO - Processing sensor: ASTa1241_Temperature
+2025-03-28 16:08:51,725 - __main__ - INFO - Processing sensor: ASTa1243_Temperature
+2025-03-28 16:08:51,727 - __main__ - INFO - Processing sensor: ASTa1250_Temperature
+2025-03-28 16:08:51,728 - __main__ - INFO - Processing sensor: ASTa1252_Temperature
+2025-03-28 16:08:51,730 - __main__ - INFO - Processing sensor: ASTa1257_Temperature
+2025-03-28 16:08:51,732 - __main__ - INFO - Processing sensor: TP1152497_Temperature
+2025-03-28 16:08:51,733 - __main__ - INFO - Processing sensor: TP1152499_Temperature
+2025-03-28 16:08:51,735 - __main__ - INFO - Processing sensor: TP1152501_Temperature
+2025-03-28 16:08:51,737 - __main__ - INFO - Processing sensor: TP1153137_Temperature
+2025-03-28 16:08:51,738 - __main__ - INFO - Processing sensor: TP1153165_Temperature
+2025-03-28 16:08:51,740 - __main__ - INFO - Processing sensor: VAS1000_Temperature
+2025-03-28 16:08:51,742 - __main__ - INFO - Processing sensor: VAS1001_Temperature
+2025-03-28 16:08:51,743 - __main__ - INFO - Processing sensor: VAS1002_Temperature
+2025-03-28 16:08:51,745 - __main__ - INFO - Processing sensor: VAST1239_Temperature
+2025-03-28 16:08:51,748 - __main__ - INFO - Filtered out 0 rows with null values, zeros, or invalid data
+2025-03-28 16:08:51,750 - __main__ - INFO - Saved 105 valid temperature data rows to /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/hourly/temperature_hourly_20250328.csv
+2025-03-28 16:08:51,750 - __main__ - INFO - Reading weather 15-minute data files
+2025-03-28 16:08:51,750 - __main__ - INFO - Processing all data regardless of last processed time
+2025-03-28 16:08:51,750 - __main__ - WARNING - No weather 15-minute data files found
+2025-03-28 16:08:51,750 - __main__ - INFO - Processing complete
+2025-03-28 16:10:16,992 - __main__ - INFO - Last processed time: 2000-01-01 00:00:00
+2025-03-28 16:10:16,992 - __main__ - INFO - Processing data up to: 2025-03-28 15:00:00
+2025-03-28 16:10:16,992 - __main__ - INFO - Reading temperature 15-minute data files
+2025-03-28 16:10:16,992 - __main__ - INFO - Processing all data regardless of last processed time
+2025-03-28 16:10:16,993 - __main__ - INFO - Reading file: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min/temperature_15min_20250328.csv
+2025-03-28 16:10:16,994 - __main__ - INFO - Found 371 rows of data in file
+2025-03-28 16:10:16,995 - __main__ - INFO - Total temperature data to process: 371 rows
+2025-03-28 16:10:16,995 - __main__ - INFO - Time range: 2023-08-12 11:45:00 to 2023-08-12 17:45:00
+2025-03-28 16:10:16,995 - __main__ - INFO - Aggregating data to hourly intervals
+2025-03-28 16:10:16,995 - __main__ - INFO - Processing sensor: ASTa1239_Temperature
+2025-03-28 16:10:16,998 - __main__ - INFO - Processing sensor: ASTa1241_Temperature
+2025-03-28 16:10:16,999 - __main__ - INFO - Processing sensor: ASTa1243_Temperature
+2025-03-28 16:10:17,001 - __main__ - INFO - Processing sensor: ASTa1250_Temperature
+2025-03-28 16:10:17,003 - __main__ - INFO - Processing sensor: ASTa1252_Temperature
+2025-03-28 16:10:17,004 - __main__ - INFO - Processing sensor: ASTa1257_Temperature
+2025-03-28 16:10:17,006 - __main__ - INFO - Processing sensor: TP1152497_Temperature
+2025-03-28 16:10:17,008 - __main__ - INFO - Processing sensor: TP1152499_Temperature
+2025-03-28 16:10:17,009 - __main__ - INFO - Processing sensor: TP1152501_Temperature
+2025-03-28 16:10:17,011 - __main__ - INFO - Processing sensor: TP1153137_Temperature
+2025-03-28 16:10:17,012 - __main__ - INFO - Processing sensor: TP1153165_Temperature
+2025-03-28 16:10:17,014 - __main__ - INFO - Processing sensor: VAS1000_Temperature
+2025-03-28 16:10:17,016 - __main__ - INFO - Processing sensor: VAS1001_Temperature
+2025-03-28 16:10:17,017 - __main__ - INFO - Processing sensor: VAS1002_Temperature
+2025-03-28 16:10:17,019 - __main__ - INFO - Processing sensor: VAST1239_Temperature
+2025-03-28 16:10:17,022 - __main__ - INFO - Filtered out 0 rows with null values, zeros, or invalid data
+2025-03-28 16:10:17,023 - __main__ - INFO - Saved 105 valid temperature data rows to /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/hourly/temperature_hourly_20250328.csv
+2025-03-28 16:10:17,023 - __main__ - INFO - Reading weather 15-minute data files
+2025-03-28 16:10:17,023 - __main__ - INFO - Processing all data regardless of last processed time
+2025-03-28 16:10:17,024 - __main__ - WARNING - No weather 15-minute data files found
+2025-03-28 16:10:17,024 - __main__ - INFO - Updated last processed time to 2025-03-28 15:00:00
+2025-03-28 16:10:17,024 - __main__ - INFO - Processing complete

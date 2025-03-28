@@ -28,6 +28,7 @@ import argparse
 import logging
 from datetime import datetime, timedelta
 import json
+import re
 
 import pandas as pd
 import numpy as np
@@ -202,8 +203,43 @@ def read_tdms_file(file_path):
                 # Add seconds from 'Time' column to the test start time
                 df['timestamp'] = test_start_time + pd.to_timedelta(df['Time'], unit='s')
             else:
-                # If no TestStart_Time, use Time as seconds from epoch
-                df['timestamp'] = pd.to_datetime(df['Time'], unit='s')
+                # Try to extract date from filename (assuming format like *_MM_DD_YYYY_* or similar)
+                filename = os.path.basename(file_path)
+                date_match = None
+                
+                # Extract date pattern from filename
+                # Try waterloo format: Waterloo_*_MM_DD_YYYY_HH_MM_SS
+                waterloo_pattern = re.search(r'Waterloo_.*?_(\d{2})_(\d{2})_(\d{4})_', filename)
+                # Try to match yyyy-mm-dd or yyyy_mm_dd format
+                date_pattern_1 = re.search(r'(\d{4})[-_](\d{1,2})[-_](\d{1,2})', filename)
+                # Try to match mm_dd_yyyy format
+                date_pattern_2 = re.search(r'(\d{1,2})[-_](\d{1,2})[-_](\d{4})', filename)
+                
+                if waterloo_pattern:
+                    # Waterloo format: MM_DD_YYYY
+                    month, day, year = waterloo_pattern.groups()
+                    date_match = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                    logger.info(f"Extracted date {date_match} from Waterloo filename format: {filename}")
+                elif date_pattern_1:
+                    # Format: yyyy-mm-dd or yyyy_mm_dd
+                    year, month, day = date_pattern_1.groups()
+                    date_match = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                elif date_pattern_2:
+                    # Format: mm_dd_yyyy
+                    month, day, year = date_pattern_2.groups()
+                    date_match = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                
+                if date_match:
+                    logger.info(f"Extracted date {date_match} from filename {filename}")
+                    # Create a reference date at midnight of the extracted date
+                    ref_date = pd.to_datetime(date_match)
+                    # Add seconds from 'Time' column to the reference date
+                    df['timestamp'] = ref_date + pd.to_timedelta(df['Time'], unit='s')
+                else:
+                    # As a fallback, use file modification time
+                    logger.warning("Could not find TestStart_Time or extract date from filename, using file modification time")
+                    file_mtime = pd.to_datetime(datetime.fromtimestamp(os.path.getmtime(file_path)).date())
+                    df['timestamp'] = file_mtime + pd.to_timedelta(df['Time'], unit='s')
         else:
             logger.warning("No Time column found in TDMS file")
         
@@ -256,9 +292,43 @@ def process_excel_file(file_path):
                 test_start_time = pd.to_datetime(test_start_time)
                 df['timestamp'] = test_start_time + pd.to_timedelta(df['Time'], unit='s')
             except:
-                # If can't find test start time, use Time as seconds from epoch
-                logger.warning("Could not find TestStart_Time, using Time column as seconds from epoch")
-                df['timestamp'] = pd.to_datetime(df['Time'], unit='s')
+                # Try to extract date from filename (assuming format like *_MM_DD_YYYY_* or similar)
+                filename = os.path.basename(file_path)
+                date_match = None
+                
+                # Extract date pattern from filename
+                # Try waterloo format: Waterloo_*_MM_DD_YYYY_HH_MM_SS
+                waterloo_pattern = re.search(r'Waterloo_.*?_(\d{2})_(\d{2})_(\d{4})_', filename)
+                # Try to match yyyy-mm-dd or yyyy_mm_dd format
+                date_pattern_1 = re.search(r'(\d{4})[-_](\d{1,2})[-_](\d{1,2})', filename)
+                # Try to match mm_dd_yyyy format
+                date_pattern_2 = re.search(r'(\d{1,2})[-_](\d{1,2})[-_](\d{4})', filename)
+                
+                if waterloo_pattern:
+                    # Waterloo format: MM_DD_YYYY
+                    month, day, year = waterloo_pattern.groups()
+                    date_match = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                    logger.info(f"Extracted date {date_match} from Waterloo filename format: {filename}")
+                elif date_pattern_1:
+                    # Format: yyyy-mm-dd or yyyy_mm_dd
+                    year, month, day = date_pattern_1.groups()
+                    date_match = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                elif date_pattern_2:
+                    # Format: mm_dd_yyyy
+                    month, day, year = date_pattern_2.groups()
+                    date_match = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                
+                if date_match:
+                    logger.info(f"Extracted date {date_match} from filename {filename}")
+                    # Create a reference date at midnight of the extracted date
+                    ref_date = pd.to_datetime(date_match)
+                    # Add seconds from 'Time' column to the reference date
+                    df['timestamp'] = ref_date + pd.to_timedelta(df['Time'], unit='s')
+                else:
+                    # As a fallback, use file modification time
+                    logger.warning("Could not find TestStart_Time or extract date from filename, using file modification time")
+                    file_mtime = pd.to_datetime(datetime.fromtimestamp(os.path.getmtime(file_path)).date())
+                    df['timestamp'] = file_mtime + pd.to_timedelta(df['Time'], unit='s')
         
         return df
     
