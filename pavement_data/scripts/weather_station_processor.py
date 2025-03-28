@@ -280,6 +280,9 @@ def aggregate_to_15min(df):
         resampled = resampled.dropna(subset=['mean', 'min', 'max'])
         resampled = resampled[resampled['count'] > 0]
         
+        # Set std to 0.0 when count is 1 (can't calculate std dev for a single value)
+        resampled.loc[resampled['count'] == 1, 'std'] = 0.0
+        
         if resampled.empty:
             logger.warning(f"No valid aggregated data for metric {metric}")
             continue
@@ -332,16 +335,54 @@ def save_aggregated_data(df, output_dir, time_interval):
         # If only sensor_id exists, rename it to metric_name
         df_to_save = df_to_save.rename(columns={'sensor_id': 'metric_name'})
     
+    # Fill empty or NaN std values with 0.0
+    if 'std' in df_to_save.columns:
+        # Convert std column to numeric, forcing NaN for non-numeric values
+        df_to_save['std'] = pd.to_numeric(df_to_save['std'], errors='coerce')
+        # Replace NaN with 0.0
+        df_to_save['std'] = df_to_save['std'].fillna(0.0)
+        # Also set std to 0.0 where count is 1 (can't calculate std for single value)
+        if 'count' in df_to_save.columns:
+            df_to_save.loc[df_to_save['count'] == 1, 'std'] = 0.0
+    
     # Generate filename with current date
     current_date = datetime.now().strftime('%Y%m%d')
     output_file = os.path.join(interval_dir, f"weather_{time_interval}_{current_date}.csv")
     
-    # Check if file exists
-    file_exists = os.path.isfile(output_file)
+    # Check if file exists and read existing data to avoid duplicates
+    existing_df = pd.DataFrame()
+    if os.path.isfile(output_file):
+        try:
+            existing_df = pd.read_csv(output_file)
+        except Exception as e:
+            logger.error(f"Error reading existing file {output_file}: {e}")
+    
+    # For weekly data, check for duplicates
+    if time_interval == 'weekly' and not existing_df.empty:
+        # Create a key for identifying duplicates
+        if 'week_start' in df_to_save.columns and 'metric_name' in df_to_save.columns:
+            # Remove duplicates, keeping only the new data
+            if 'week_start' in existing_df.columns and 'metric_name' in existing_df.columns:
+                # Convert dates to string for comparison
+                existing_df['week_start'] = existing_df['week_start'].astype(str)
+                df_to_save['week_start'] = df_to_save['week_start'].astype(str)
+                
+                # Create a merge key
+                existing_df['merge_key'] = existing_df['week_start'] + '_' + existing_df['metric_name'].astype(str)
+                df_to_save['merge_key'] = df_to_save['week_start'] + '_' + df_to_save['metric_name'].astype(str)
+                
+                # Only keep rows that aren't already in the existing file
+                mask = ~df_to_save['merge_key'].isin(existing_df['merge_key'])
+                df_to_save = df_to_save[mask].drop('merge_key', axis=1)
+                
+                # If all rows were duplicates, nothing new to save
+                if df_to_save.empty:
+                    logger.info(f"No new data to save for {time_interval}, all entries already exist in the file")
+                    return
     
     # Write to CSV
-    mode = 'a' if file_exists else 'w'
-    header = not file_exists
+    mode = 'a' if os.path.isfile(output_file) else 'w'
+    header = not os.path.isfile(output_file)
     
     df_to_save.to_csv(output_file, mode=mode, index=False, header=header)
     
@@ -371,7 +412,8 @@ def calculate_aggregated_std_dev(groups):
     # combined_variance = (sum of (count * variance) + sum of (count * (group_mean - combined_mean)²)) / total_count
     
     # First part: sum of (count * variance)
-    sum_weighted_variance = sum(group['count'] * (group['std']**2) for group in groups)
+    # Handle missing std values by treating them as 0
+    sum_weighted_variance = sum(group['count'] * ((group['std'] or 0)**2) for group in groups)
     
     # Second part: sum of (count * (group_mean - combined_mean)²)
     sum_weighted_mean_diff_squared = sum(group['count'] * (group['mean'] - combined_mean)**2 for group in groups)
@@ -420,19 +462,28 @@ def aggregate_to_hourly(df):
             if not hour_data.empty:
                 # Create groups for std dev calculation
                 groups = [
-                    {'mean': row['mean'], 'std': row['std'], 'count': row['count']} 
+                    {'mean': row['mean'], 'std': row['std'] if not pd.isna(row['std']) else 0.0, 'count': row['count']} 
                     for idx, row in hour_data.iterrows()
                 ]
                 
-                hourly_results.append({
+                # Calculate aggregated values
+                count_sum = hour_data['count'].sum()
+                
+                hourly_result = {
                     'timestamp': hour,
                     'mean': hour_data['mean'].mean(),
                     'min': hour_data['min'].min(),
                     'max': hour_data['max'].max(),
                     'std': calculate_aggregated_std_dev(groups),
-                    'count': hour_data['count'].sum(),
+                    'count': count_sum,
                     'metric_name': metric_name
-                })
+                }
+                
+                # Set std to 0.0 when count is 1
+                if count_sum == 1:
+                    hourly_result['std'] = 0.0
+                
+                hourly_results.append(hourly_result)
         
         if hourly_results:
             results.append(pd.DataFrame(hourly_results))
@@ -488,9 +539,12 @@ def aggregate_to_daily(df):
             if not day_data.empty:
                 # Create groups for std dev calculation
                 groups = [
-                    {'mean': row['mean'], 'std': row['std'], 'count': row['count']} 
+                    {'mean': row['mean'], 'std': row['std'] if not pd.isna(row['std']) else 0.0, 'count': row['count']} 
                     for idx, row in day_data.iterrows()
                 ]
+                
+                # Calculate aggregated values
+                count_sum = day_data['count'].sum()
                 
                 daily_stats = {
                     'date': day,
@@ -499,8 +553,12 @@ def aggregate_to_daily(df):
                     'min': day_data['min'].min(),
                     'max': day_data['max'].max(),
                     'std': calculate_aggregated_std_dev(groups),
-                    'count': day_data['count'].sum()
+                    'count': count_sum
                 }
+                
+                # Set std to 0.0 when count is 1
+                if count_sum == 1:
+                    daily_stats['std'] = 0.0
                 
                 # Calculate daily range
                 daily_stats['temp_range'] = daily_stats['max'] - daily_stats['min']
@@ -559,9 +617,12 @@ def aggregate_to_weekly(df):
         
         # Create groups for std dev calculation
         groups = [
-            {'mean': row['mean'], 'std': row['std'], 'count': row['count']} 
+            {'mean': row['mean'], 'std': row['std'] if not pd.isna(row['std']) else 0.0, 'count': row['count']} 
             for idx, row in week_data.iterrows()
         ]
+        
+        # Calculate aggregated values
+        count_sum = week_data['count'].sum()
         
         weekly_stats = {
             'week_start': week_start,
@@ -571,8 +632,12 @@ def aggregate_to_weekly(df):
             'min': week_data['min'].min(),
             'max': week_data['max'].max(),
             'std': calculate_aggregated_std_dev(groups),
-            'count': week_data['count'].sum()
+            'count': count_sum
         }
+        
+        # Set std to 0.0 when count is 1
+        if count_sum == 1:
+            weekly_stats['std'] = 0.0
         
         # Calculate range for this metric
         weekly_stats['temp_range'] = weekly_stats['max'] - weekly_stats['min']
