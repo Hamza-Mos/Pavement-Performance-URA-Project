@@ -1,403 +1,171 @@
-2025-03-26 14:15:10,922 - __main__ - INFO - Using output directory: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed
-2025-03-26 14:15:10,924 - __main__ - INFO - Last processed time: 1970-01-12 17:59:56.100000
-2025-03-26 14:15:10,924 - __main__ - INFO - Processing all data regardless of last processed time
-2025-03-26 14:15:10,924 - __main__ - INFO - Reading TDMS file: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/raw/Waterloo_R246_08_01_2023_00_31_55_Normal Data_AllHighSpeed.tdms
-2025-03-26 14:15:14,509 - __main__ - INFO - Time range: 0.0 to 1015196.0999999997
-2025-03-26 14:15:14,510 - __main__ - INFO - Interpolating channel VAS1000 from 216010 to 1169702 points
-2025-03-26 14:15:14,510 - __main__ - WARNING - Could not process channel VAS1000 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,510 - __main__ - INFO - Interpolating channel VAS1001 from 216026 to 1169702 points
-2025-03-26 14:15:14,511 - __main__ - WARNING - Could not process channel VAS1001 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,511 - __main__ - INFO - Interpolating channel VAS1002 from 216013 to 1169702 points
-2025-03-26 14:15:14,511 - __main__ - WARNING - Could not process channel VAS1002 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,511 - __main__ - INFO - Interpolating channel VAST1239 from 216013 to 1169702 points
-2025-03-26 14:15:14,511 - __main__ - WARNING - Could not process channel VAST1239 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,511 - __main__ - INFO - Interpolating channel ASTa1239 from 215953 to 1169702 points
-2025-03-26 14:15:14,512 - __main__ - WARNING - Could not process channel ASTa1239 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,512 - __main__ - INFO - Interpolating channel ASTa1241 from 215971 to 1169702 points
-2025-03-26 14:15:14,512 - __main__ - WARNING - Could not process channel ASTa1241 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,512 - __main__ - INFO - Interpolating channel ASTa1243 from 215982 to 1169702 points
-2025-03-26 14:15:14,512 - __main__ - WARNING - Could not process channel ASTa1243 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,513 - __main__ - INFO - Interpolating channel ASTa1249 from 216014 to 1169702 points
-2025-03-26 14:15:14,513 - __main__ - WARNING - Could not process channel ASTa1249 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,513 - __main__ - INFO - Interpolating channel ASTa1250 from 216010 to 1169702 points
-2025-03-26 14:15:14,513 - __main__ - WARNING - Could not process channel ASTa1250 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,513 - __main__ - INFO - Interpolating channel ASTa1252 from 216010 to 1169702 points
-2025-03-26 14:15:14,514 - __main__ - WARNING - Could not process channel ASTa1252 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,514 - __main__ - INFO - Interpolating channel ASTa1254 from 216010 to 1169702 points
-2025-03-26 14:15:14,514 - __main__ - WARNING - Could not process channel ASTa1254 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,514 - __main__ - INFO - Interpolating channel ASTa1257 from 216010 to 1169702 points
-2025-03-26 14:15:14,515 - __main__ - WARNING - Could not process channel ASTa1257 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,515 - __main__ - INFO - Interpolating channel TP1151769 from 215982 to 1169702 points
-2025-03-26 14:15:14,515 - __main__ - WARNING - Could not process channel TP1151769 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,515 - __main__ - INFO - Interpolating channel TP1152497 from 216006 to 1169702 points
-2025-03-26 14:15:14,515 - __main__ - WARNING - Could not process channel TP1152497 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,516 - __main__ - INFO - Interpolating channel TP1317162 from 216009 to 1169702 points
-2025-03-26 14:15:14,516 - __main__ - WARNING - Could not process channel TP1317162 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,516 - __main__ - INFO - Interpolating channel TP1152501 from 216009 to 1169702 points
-2025-03-26 14:15:14,516 - __main__ - WARNING - Could not process channel TP1152501 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,516 - __main__ - INFO - Interpolating channel TP1153165 from 215978 to 1169702 points
-2025-03-26 14:15:14,517 - __main__ - WARNING - Could not process channel TP1153165 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,517 - __main__ - INFO - Interpolating channel TP1152499 from 216020 to 1169702 points
-2025-03-26 14:15:14,517 - __main__ - WARNING - Could not process channel TP1152499 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,517 - __main__ - INFO - Interpolating channel TP1152500 from 216000 to 1169702 points
-2025-03-26 14:15:14,518 - __main__ - WARNING - Could not process channel TP1152500 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,518 - __main__ - INFO - Interpolating channel TP1153137 from 216018 to 1169702 points
-2025-03-26 14:15:14,519 - __main__ - WARNING - Could not process channel TP1153137 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,519 - __main__ - INFO - Interpolating channel TP1317164 from 215989 to 1169702 points
-2025-03-26 14:15:14,519 - __main__ - WARNING - Could not process channel TP1317164 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,519 - __main__ - INFO - Interpolating channel MDD-001_ML1 from 216002 to 1169702 points
-2025-03-26 14:15:14,520 - __main__ - WARNING - Could not process channel MDD-001_ML1 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,520 - __main__ - INFO - Interpolating channel MDD-001_ML2 from 216002 to 1169702 points
-2025-03-26 14:15:14,520 - __main__ - WARNING - Could not process channel MDD-001_ML2 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,520 - __main__ - INFO - Interpolating channel MDD-001_ML3 from 215979 to 1169702 points
-2025-03-26 14:15:14,520 - __main__ - WARNING - Could not process channel MDD-001_ML3 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,521 - __main__ - INFO - Interpolating channel MDD-001_ML4 from 215948 to 1169702 points
-2025-03-26 14:15:14,521 - __main__ - WARNING - Could not process channel MDD-001_ML4 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,521 - __main__ - INFO - Interpolating channel MDD-002_ML1 from 216015 to 1169702 points
-2025-03-26 14:15:14,521 - __main__ - WARNING - Could not process channel MDD-002_ML1 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,521 - __main__ - INFO - Interpolating channel MDD-002_ML2 from 216015 to 1169702 points
-2025-03-26 14:15:14,522 - __main__ - WARNING - Could not process channel MDD-002_ML2 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,522 - __main__ - INFO - Interpolating channel MDD-002_ML3 from 216015 to 1169702 points
-2025-03-26 14:15:14,522 - __main__ - WARNING - Could not process channel MDD-002_ML3 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,522 - __main__ - INFO - Interpolating channel MDD-002_ML4 from 216015 to 1169702 points
-2025-03-26 14:15:14,522 - __main__ - WARNING - Could not process channel MDD-002_ML4 in group AllHighSpeed: No module named 'scipy'
-2025-03-26 14:15:14,612 - __main__ - INFO - Created DataFrame with 1169702 rows and 23 columns
-2025-03-26 14:15:14,612 - __main__ - INFO - Columns: Time, VAS1000_Temperature, VAS1001_Temperature, VAS1002_Temperature, VAST1239_Temperature, ASTa1239_Temperature, ASTa1241_Temperature, ASTa1243_Temperature, ASTa1249_Temperature, ASTa1250_Temperature, ASTa1252_Temperature, ASTa1254_Temperature, ASTa1257_Temperature, TP1151769_Temperature, TP1152497_Temperature, TP1317162_Temperature, TP1152501_Temperature, TP1153165_Temperature, TP1152499_Temperature, TP1152500_Temperature, TP1153137_Temperature, TP1317164_Temperature, timestamp
-2025-03-26 14:15:14,612 - __main__ - INFO - Data statistics:
-2025-03-26 14:15:14,614 - __main__ - INFO - Time range: 1970-01-01 00:00:00 to 1970-01-12 17:59:56.100000
-2025-03-26 14:15:14,620 - __main__ - INFO - Number of unique timestamps: 216000
-2025-03-26 14:15:14,621 - __main__ - INFO - VAS1000_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,622 - __main__ - INFO - VAS1001_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,623 - __main__ - INFO - VAS1002_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,623 - __main__ - INFO - VAST1239_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,624 - __main__ - INFO - ASTa1239_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,625 - __main__ - INFO - ASTa1241_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,625 - __main__ - INFO - ASTa1243_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,626 - __main__ - INFO - ASTa1249_Temperature: 953703 non-null values
-2025-03-26 14:15:14,627 - __main__ - INFO - ASTa1250_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,627 - __main__ - INFO - ASTa1252_Temperature: 1063505 non-null values
-2025-03-26 14:15:14,628 - __main__ - INFO - ASTa1254_Temperature: 953703 non-null values
-2025-03-26 14:15:14,628 - __main__ - INFO - ASTa1257_Temperature: 1153419 non-null values
-2025-03-26 14:15:14,629 - __main__ - INFO - TP1151769_Temperature: 953703 non-null values
-2025-03-26 14:15:14,629 - __main__ - INFO - TP1152497_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,630 - __main__ - INFO - TP1317162_Temperature: 953703 non-null values
-2025-03-26 14:15:14,630 - __main__ - INFO - TP1152501_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,631 - __main__ - INFO - TP1153165_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,632 - __main__ - INFO - TP1152499_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,632 - __main__ - INFO - TP1152500_Temperature: 953703 non-null values
-2025-03-26 14:15:14,633 - __main__ - INFO - TP1153137_Temperature: 1169702 non-null values
-2025-03-26 14:15:14,634 - __main__ - INFO - TP1317164_Temperature: 953703 non-null values
-2025-03-26 14:15:14,646 - __main__ - INFO - Full data time range: 1970-01-01 00:00:00 to 1970-01-12 17:59:56.100000
-2025-03-26 14:15:14,646 - __main__ - INFO - Processing data up to: 2025-03-26 14:00:00
-2025-03-26 14:15:14,646 - __main__ - INFO - Found 0 temperature sensors and 0 weather sensors
-2025-03-26 14:15:14,646 - __main__ - WARNING - No known temperature or weather sensors found in data
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: VAS1000_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: VAS1001_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: VAS1002_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: VAST1239_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: ASTa1239_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: ASTa1241_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: ASTa1243_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: ASTa1249_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: ASTa1250_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: ASTa1252_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: ASTa1254_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: ASTa1257_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: TP1151769_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: TP1152497_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: TP1317162_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: TP1152501_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: TP1153165_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: TP1152499_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: TP1152500_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: TP1153137_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Adding possible temperature sensor: TP1317164_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Found temperature sensors: VAS1000_Temperature, VAS1001_Temperature, VAS1002_Temperature, VAST1239_Temperature, ASTa1239_Temperature, ASTa1241_Temperature, ASTa1243_Temperature, ASTa1249_Temperature, ASTa1250_Temperature, ASTa1252_Temperature, ASTa1254_Temperature, ASTa1257_Temperature, TP1151769_Temperature, TP1152497_Temperature, TP1317162_Temperature, TP1152501_Temperature, TP1153165_Temperature, TP1152499_Temperature, TP1152500_Temperature, TP1153137_Temperature, TP1317164_Temperature
-2025-03-26 14:15:14,646 - __main__ - INFO - Found weather sensors: 
-2025-03-26 14:15:14,646 - __main__ - INFO - Processing temperature data...
-2025-03-26 14:15:14,647 - __main__ - INFO - Aggregating data to 15-minute intervals
-2025-03-26 14:15:14,661 - __main__ - INFO - Processing sensor: VAS1000_Temperature
-2025-03-26 14:15:14,669 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAS1000_Temperature
-2025-03-26 14:15:14,682 - __main__ - INFO - Processing sensor: VAS1001_Temperature
-2025-03-26 14:15:14,689 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAS1001_Temperature
-2025-03-26 14:15:14,699 - __main__ - INFO - Processing sensor: VAS1002_Temperature
-2025-03-26 14:15:14,706 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAS1002_Temperature
-2025-03-26 14:15:14,716 - __main__ - INFO - Processing sensor: VAST1239_Temperature
-2025-03-26 14:15:14,723 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAST1239_Temperature
-2025-03-26 14:15:14,734 - __main__ - INFO - Processing sensor: ASTa1239_Temperature
-2025-03-26 14:15:14,741 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1239_Temperature
-2025-03-26 14:15:14,751 - __main__ - INFO - Processing sensor: ASTa1241_Temperature
-2025-03-26 14:15:14,759 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1241_Temperature
-2025-03-26 14:15:14,768 - __main__ - INFO - Processing sensor: ASTa1243_Temperature
-2025-03-26 14:15:14,776 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1243_Temperature
-2025-03-26 14:15:14,786 - __main__ - INFO - Processing sensor: ASTa1249_Temperature
-2025-03-26 14:15:14,830 - __main__ - WARNING - No valid aggregated data for sensor ASTa1249_Temperature
-2025-03-26 14:15:14,830 - __main__ - INFO - Processing sensor: ASTa1250_Temperature
-2025-03-26 14:15:14,837 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1250_Temperature
-2025-03-26 14:15:14,848 - __main__ - INFO - Processing sensor: ASTa1252_Temperature
-2025-03-26 14:15:14,853 - __main__ - INFO - Filtered out 1059900 rows with near-zero values for sensor ASTa1252_Temperature
-2025-03-26 14:15:14,859 - __main__ - INFO - Processing sensor: ASTa1254_Temperature
-2025-03-26 14:15:14,905 - __main__ - WARNING - No valid aggregated data for sensor ASTa1254_Temperature
-2025-03-26 14:15:14,905 - __main__ - INFO - Processing sensor: ASTa1257_Temperature
-2025-03-26 14:15:14,911 - __main__ - INFO - Filtered out 969986 rows with near-zero values for sensor ASTa1257_Temperature
-2025-03-26 14:15:14,921 - __main__ - INFO - Processing sensor: TP1151769_Temperature
-2025-03-26 14:15:14,966 - __main__ - WARNING - No valid aggregated data for sensor TP1151769_Temperature
-2025-03-26 14:15:14,966 - __main__ - INFO - Processing sensor: TP1152497_Temperature
-2025-03-26 14:15:14,973 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1152497_Temperature
-2025-03-26 14:15:14,983 - __main__ - INFO - Processing sensor: TP1317162_Temperature
-2025-03-26 14:15:15,028 - __main__ - WARNING - No valid aggregated data for sensor TP1317162_Temperature
-2025-03-26 14:15:15,028 - __main__ - INFO - Processing sensor: TP1152501_Temperature
-2025-03-26 14:15:15,034 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1152501_Temperature
-2025-03-26 14:15:15,044 - __main__ - INFO - Processing sensor: TP1153165_Temperature
-2025-03-26 14:15:15,051 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1153165_Temperature
-2025-03-26 14:15:15,061 - __main__ - INFO - Processing sensor: TP1152499_Temperature
-2025-03-26 14:15:15,067 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1152499_Temperature
-2025-03-26 14:15:15,077 - __main__ - INFO - Processing sensor: TP1152500_Temperature
-2025-03-26 14:15:15,120 - __main__ - WARNING - No valid aggregated data for sensor TP1152500_Temperature
-2025-03-26 14:15:15,120 - __main__ - INFO - Processing sensor: TP1153137_Temperature
-2025-03-26 14:15:15,127 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1153137_Temperature
-2025-03-26 14:15:15,137 - __main__ - INFO - Processing sensor: TP1317164_Temperature
-2025-03-26 14:15:15,177 - __main__ - WARNING - No valid aggregated data for sensor TP1317164_Temperature
-2025-03-26 14:15:15,179 - __main__ - INFO - Aggregated data: 371 rows with valid values across 15 sensors
-2025-03-26 14:15:15,182 - __main__ - INFO - Aggregated temperature data: 371 rows
-2025-03-26 14:15:15,183 - __main__ - INFO - Filtered out 0 rows with null values, zeros, or invalid data
-2025-03-26 14:15:15,183 - __main__ - INFO - Using output directory: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min
-2025-03-26 14:15:15,183 - __main__ - INFO - Output file does not exist: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min/temperature_15min_20250326.csv
-2025-03-26 14:15:15,187 - __main__ - INFO - Successfully saved 371 rows of valid temperature data to /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min/temperature_15min_20250326.csv
-2025-03-26 14:15:15,188 - __main__ - INFO - Updated last processed time to 1970-01-12 17:59:56.100000
-2025-03-26 14:15:15,188 - __main__ - INFO - Updated last processed time to: 1970-01-12 17:59:56.100000
-2025-03-26 14:15:15,188 - __main__ - INFO - Processing complete
-2025-03-28 16:08:39,630 - __main__ - INFO - Using output directory: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed
-2025-03-28 16:08:39,633 - __main__ - INFO - Last processed time: 2000-01-01 00:00:00
-2025-03-28 16:08:39,633 - __main__ - INFO - Processing all data regardless of last processed time
-2025-03-28 16:08:39,633 - __main__ - INFO - Reading TDMS file: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/raw/Waterloo_R246_08_01_2023_00_31_55_Normal Data_AllHighSpeed.tdms
-2025-03-28 16:08:43,107 - __main__ - INFO - Time range: 0.0 to 1015196.0999999997
-2025-03-28 16:08:43,107 - __main__ - INFO - Interpolating channel VAS1000 from 216010 to 1169702 points
-2025-03-28 16:08:50,830 - __main__ - INFO - Interpolating channel VAS1001 from 216026 to 1169702 points
-2025-03-28 16:08:50,854 - __main__ - INFO - Interpolating channel VAS1002 from 216013 to 1169702 points
-2025-03-28 16:08:50,872 - __main__ - INFO - Interpolating channel VAST1239 from 216013 to 1169702 points
-2025-03-28 16:08:50,891 - __main__ - INFO - Interpolating channel ASTa1239 from 215953 to 1169702 points
-2025-03-28 16:08:50,909 - __main__ - INFO - Interpolating channel ASTa1241 from 215971 to 1169702 points
-2025-03-28 16:08:50,927 - __main__ - INFO - Interpolating channel ASTa1243 from 215982 to 1169702 points
-2025-03-28 16:08:50,945 - __main__ - INFO - Interpolating channel ASTa1249 from 216014 to 1169702 points
-2025-03-28 16:08:50,961 - __main__ - INFO - Interpolating channel ASTa1250 from 216010 to 1169702 points
-2025-03-28 16:08:50,977 - __main__ - INFO - Interpolating channel ASTa1252 from 216010 to 1169702 points
-2025-03-28 16:08:50,993 - __main__ - INFO - Interpolating channel ASTa1254 from 216010 to 1169702 points
-2025-03-28 16:08:51,010 - __main__ - INFO - Interpolating channel ASTa1257 from 216010 to 1169702 points
-2025-03-28 16:08:51,026 - __main__ - INFO - Interpolating channel TP1151769 from 215982 to 1169702 points
-2025-03-28 16:08:51,042 - __main__ - INFO - Interpolating channel TP1152497 from 216006 to 1169702 points
-2025-03-28 16:08:51,058 - __main__ - INFO - Interpolating channel TP1317162 from 216009 to 1169702 points
-2025-03-28 16:08:51,073 - __main__ - INFO - Interpolating channel TP1152501 from 216009 to 1169702 points
-2025-03-28 16:08:51,089 - __main__ - INFO - Interpolating channel TP1153165 from 215978 to 1169702 points
-2025-03-28 16:08:51,107 - __main__ - INFO - Interpolating channel TP1152499 from 216020 to 1169702 points
-2025-03-28 16:08:51,124 - __main__ - INFO - Interpolating channel TP1152500 from 216000 to 1169702 points
-2025-03-28 16:08:51,140 - __main__ - INFO - Interpolating channel TP1153137 from 216018 to 1169702 points
-2025-03-28 16:08:51,156 - __main__ - INFO - Interpolating channel TP1317164 from 215989 to 1169702 points
-2025-03-28 16:08:51,171 - __main__ - INFO - Interpolating channel MDD-001_ML1 from 216002 to 1169702 points
-2025-03-28 16:08:51,186 - __main__ - INFO - Interpolating channel MDD-001_ML2 from 216002 to 1169702 points
-2025-03-28 16:08:51,201 - __main__ - INFO - Interpolating channel MDD-001_ML3 from 215979 to 1169702 points
-2025-03-28 16:08:51,216 - __main__ - INFO - Interpolating channel MDD-001_ML4 from 215948 to 1169702 points
-2025-03-28 16:08:51,232 - __main__ - INFO - Interpolating channel MDD-002_ML1 from 216015 to 1169702 points
-2025-03-28 16:08:51,246 - __main__ - INFO - Interpolating channel MDD-002_ML2 from 216015 to 1169702 points
-2025-03-28 16:08:51,264 - __main__ - INFO - Interpolating channel MDD-002_ML3 from 216015 to 1169702 points
-2025-03-28 16:08:51,278 - __main__ - INFO - Interpolating channel MDD-002_ML4 from 216015 to 1169702 points
-2025-03-28 16:08:51,396 - __main__ - INFO - Extracted date 2023-00-31 from filename Waterloo_R246_08_01_2023_00_31_55_Normal Data_AllHighSpeed.tdms
-2025-03-28 16:08:51,397 - __main__ - ERROR - Error reading TDMS file: month must be in 1..12: 2023-00-31, at position 0
-2025-03-28 16:08:51,397 - __main__ - ERROR - An error occurred: month must be in 1..12: 2023-00-31, at position 0
-Traceback (most recent call last):
-  File "parsing.pyx", line 684, in pandas._libs.tslibs.parsing.dateutil_parse
-ValueError: month must be in 1..12
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/scripts/temp_weather_15min.py", line 611, in <module>
-    main()
-  File "/Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/scripts/temp_weather_15min.py", line 543, in main
-    df = read_tdms_file(input_file)
-  File "/Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/scripts/temp_weather_15min.py", line 228, in read_tdms_file
-    ref_date = pd.to_datetime(date_match)
-  File "/Users/hamza/Library/Python/3.9/lib/python/site-packages/pandas/core/tools/datetimes.py", line 1101, in to_datetime
-    result = convert_listlike(np.array([arg]), format)[0]
-  File "/Users/hamza/Library/Python/3.9/lib/python/site-packages/pandas/core/tools/datetimes.py", line 435, in _convert_listlike_datetimes
-    result, tz_parsed = objects_to_datetime64(
-  File "/Users/hamza/Library/Python/3.9/lib/python/site-packages/pandas/core/arrays/datetimes.py", line 2398, in objects_to_datetime64
-    result, tz_parsed = tslib.array_to_datetime(
-  File "tslib.pyx", line 414, in pandas._libs.tslib.array_to_datetime
-  File "tslib.pyx", line 596, in pandas._libs.tslib.array_to_datetime
-  File "tslib.pyx", line 553, in pandas._libs.tslib.array_to_datetime
-  File "conversion.pyx", line 641, in pandas._libs.tslibs.conversion.convert_str_to_tsobject
-  File "parsing.pyx", line 336, in pandas._libs.tslibs.parsing.parse_datetime_string
-  File "parsing.pyx", line 688, in pandas._libs.tslibs.parsing.dateutil_parse
-pandas._libs.tslibs.parsing.DateParseError: month must be in 1..12: 2023-00-31, at position 0
-2025-03-28 16:10:11,894 - __main__ - INFO - Using output directory: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed
-2025-03-28 16:10:11,895 - __main__ - INFO - Last processed time: 2000-01-01 00:00:00
-2025-03-28 16:10:11,895 - __main__ - INFO - Processing all data regardless of last processed time
-2025-03-28 16:10:11,895 - __main__ - INFO - Reading TDMS file: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/raw/Waterloo_R246_08_01_2023_00_31_55_Normal Data_AllHighSpeed.tdms
-2025-03-28 16:10:15,007 - __main__ - INFO - Time range: 0.0 to 1015196.0999999997
-2025-03-28 16:10:15,007 - __main__ - INFO - Interpolating channel VAS1000 from 216010 to 1169702 points
-2025-03-28 16:10:15,232 - __main__ - INFO - Interpolating channel VAS1001 from 216026 to 1169702 points
-2025-03-28 16:10:15,250 - __main__ - INFO - Interpolating channel VAS1002 from 216013 to 1169702 points
-2025-03-28 16:10:15,275 - __main__ - INFO - Interpolating channel VAST1239 from 216013 to 1169702 points
-2025-03-28 16:10:15,292 - __main__ - INFO - Interpolating channel ASTa1239 from 215953 to 1169702 points
-2025-03-28 16:10:15,308 - __main__ - INFO - Interpolating channel ASTa1241 from 215971 to 1169702 points
-2025-03-28 16:10:15,324 - __main__ - INFO - Interpolating channel ASTa1243 from 215982 to 1169702 points
-2025-03-28 16:10:15,340 - __main__ - INFO - Interpolating channel ASTa1249 from 216014 to 1169702 points
-2025-03-28 16:10:15,356 - __main__ - INFO - Interpolating channel ASTa1250 from 216010 to 1169702 points
-2025-03-28 16:10:15,372 - __main__ - INFO - Interpolating channel ASTa1252 from 216010 to 1169702 points
-2025-03-28 16:10:15,387 - __main__ - INFO - Interpolating channel ASTa1254 from 216010 to 1169702 points
-2025-03-28 16:10:15,402 - __main__ - INFO - Interpolating channel ASTa1257 from 216010 to 1169702 points
-2025-03-28 16:10:15,417 - __main__ - INFO - Interpolating channel TP1151769 from 215982 to 1169702 points
-2025-03-28 16:10:15,432 - __main__ - INFO - Interpolating channel TP1152497 from 216006 to 1169702 points
-2025-03-28 16:10:15,447 - __main__ - INFO - Interpolating channel TP1317162 from 216009 to 1169702 points
-2025-03-28 16:10:15,462 - __main__ - INFO - Interpolating channel TP1152501 from 216009 to 1169702 points
-2025-03-28 16:10:15,477 - __main__ - INFO - Interpolating channel TP1153165 from 215978 to 1169702 points
-2025-03-28 16:10:15,492 - __main__ - INFO - Interpolating channel TP1152499 from 216020 to 1169702 points
-2025-03-28 16:10:15,507 - __main__ - INFO - Interpolating channel TP1152500 from 216000 to 1169702 points
-2025-03-28 16:10:15,522 - __main__ - INFO - Interpolating channel TP1153137 from 216018 to 1169702 points
-2025-03-28 16:10:15,537 - __main__ - INFO - Interpolating channel TP1317164 from 215989 to 1169702 points
-2025-03-28 16:10:15,552 - __main__ - INFO - Interpolating channel MDD-001_ML1 from 216002 to 1169702 points
-2025-03-28 16:10:15,566 - __main__ - INFO - Interpolating channel MDD-001_ML2 from 216002 to 1169702 points
-2025-03-28 16:10:15,580 - __main__ - INFO - Interpolating channel MDD-001_ML3 from 215979 to 1169702 points
-2025-03-28 16:10:15,595 - __main__ - INFO - Interpolating channel MDD-001_ML4 from 215948 to 1169702 points
-2025-03-28 16:10:15,609 - __main__ - INFO - Interpolating channel MDD-002_ML1 from 216015 to 1169702 points
-2025-03-28 16:10:15,624 - __main__ - INFO - Interpolating channel MDD-002_ML2 from 216015 to 1169702 points
-2025-03-28 16:10:15,638 - __main__ - INFO - Interpolating channel MDD-002_ML3 from 216015 to 1169702 points
-2025-03-28 16:10:15,652 - __main__ - INFO - Interpolating channel MDD-002_ML4 from 216015 to 1169702 points
-2025-03-28 16:10:15,739 - __main__ - INFO - Extracted date 2023-08-01 from Waterloo filename format: Waterloo_R246_08_01_2023_00_31_55_Normal Data_AllHighSpeed.tdms
-2025-03-28 16:10:15,739 - __main__ - INFO - Extracted date 2023-08-01 from filename Waterloo_R246_08_01_2023_00_31_55_Normal Data_AllHighSpeed.tdms
-2025-03-28 16:10:15,935 - __main__ - INFO - Created DataFrame with 1169702 rows and 52 columns
-2025-03-28 16:10:15,935 - __main__ - INFO - Columns: Time, VAS1000, VAS1001, VAS1002, VAST1239, ASTa1239, ASTa1241, ASTa1243, ASTa1249, ASTa1250, ASTa1252, ASTa1254, ASTa1257, TP1151769, TP1152497, TP1317162, TP1152501, TP1153165, TP1152499, TP1152500, TP1153137, TP1317164, MDD-001_ML1, MDD-001_ML2, MDD-001_ML3, MDD-001_ML4, MDD-002_ML1, MDD-002_ML2, MDD-002_ML3, MDD-002_ML4, VAS1000_Temperature, VAS1001_Temperature, VAS1002_Temperature, VAST1239_Temperature, ASTa1239_Temperature, ASTa1241_Temperature, ASTa1243_Temperature, ASTa1249_Temperature, ASTa1250_Temperature, ASTa1252_Temperature, ASTa1254_Temperature, ASTa1257_Temperature, TP1151769_Temperature, TP1152497_Temperature, TP1317162_Temperature, TP1152501_Temperature, TP1153165_Temperature, TP1152499_Temperature, TP1152500_Temperature, TP1153137_Temperature, TP1317164_Temperature, timestamp
-2025-03-28 16:10:15,935 - __main__ - INFO - Data statistics:
-2025-03-28 16:10:15,937 - __main__ - INFO - Time range: 2023-08-01 00:00:00 to 2023-08-12 17:59:56.100000
-2025-03-28 16:10:15,943 - __main__ - INFO - Number of unique timestamps: 216000
-2025-03-28 16:10:15,945 - __main__ - INFO - VAS1000: 1169702 non-null values
-2025-03-28 16:10:15,946 - __main__ - INFO - VAS1001: 1169702 non-null values
-2025-03-28 16:10:15,947 - __main__ - INFO - VAS1002: 1169702 non-null values
-2025-03-28 16:10:15,948 - __main__ - INFO - VAST1239: 1169702 non-null values
-2025-03-28 16:10:15,949 - __main__ - INFO - ASTa1239: 1169702 non-null values
-2025-03-28 16:10:15,950 - __main__ - INFO - ASTa1241: 1169702 non-null values
-2025-03-28 16:10:15,951 - __main__ - INFO - ASTa1243: 1169702 non-null values
-2025-03-28 16:10:15,952 - __main__ - INFO - ASTa1249: 1169702 non-null values
-2025-03-28 16:10:15,953 - __main__ - INFO - ASTa1250: 1169702 non-null values
-2025-03-28 16:10:15,954 - __main__ - INFO - ASTa1252: 1169702 non-null values
-2025-03-28 16:10:15,955 - __main__ - INFO - ASTa1254: 1169702 non-null values
-2025-03-28 16:10:15,956 - __main__ - INFO - ASTa1257: 1169702 non-null values
-2025-03-28 16:10:15,958 - __main__ - INFO - TP1151769: 1169702 non-null values
-2025-03-28 16:10:15,959 - __main__ - INFO - TP1152497: 1169702 non-null values
-2025-03-28 16:10:15,960 - __main__ - INFO - TP1317162: 1169702 non-null values
-2025-03-28 16:10:15,961 - __main__ - INFO - TP1152501: 1169702 non-null values
-2025-03-28 16:10:15,962 - __main__ - INFO - TP1153165: 1169702 non-null values
-2025-03-28 16:10:15,963 - __main__ - INFO - TP1152499: 1169702 non-null values
-2025-03-28 16:10:15,964 - __main__ - INFO - TP1152500: 1169702 non-null values
-2025-03-28 16:10:15,965 - __main__ - INFO - TP1153137: 1169702 non-null values
-2025-03-28 16:10:15,966 - __main__ - INFO - TP1317164: 1169702 non-null values
-2025-03-28 16:10:15,967 - __main__ - INFO - MDD-001_ML1: 1169702 non-null values
-2025-03-28 16:10:15,968 - __main__ - INFO - MDD-001_ML2: 1169702 non-null values
-2025-03-28 16:10:15,969 - __main__ - INFO - MDD-001_ML3: 1169702 non-null values
-2025-03-28 16:10:15,970 - __main__ - INFO - MDD-001_ML4: 1169702 non-null values
-2025-03-28 16:10:15,971 - __main__ - INFO - MDD-002_ML1: 1169702 non-null values
-2025-03-28 16:10:15,972 - __main__ - INFO - MDD-002_ML2: 1169702 non-null values
-2025-03-28 16:10:15,973 - __main__ - INFO - MDD-002_ML3: 1169702 non-null values
-2025-03-28 16:10:15,974 - __main__ - INFO - MDD-002_ML4: 1169702 non-null values
-2025-03-28 16:10:15,975 - __main__ - INFO - VAS1000_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,976 - __main__ - INFO - VAS1001_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,977 - __main__ - INFO - VAS1002_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,977 - __main__ - INFO - VAST1239_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,978 - __main__ - INFO - ASTa1239_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,979 - __main__ - INFO - ASTa1241_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,980 - __main__ - INFO - ASTa1243_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,981 - __main__ - INFO - ASTa1249_Temperature: 953703 non-null values
-2025-03-28 16:10:15,983 - __main__ - INFO - ASTa1250_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,983 - __main__ - INFO - ASTa1252_Temperature: 1063505 non-null values
-2025-03-28 16:10:15,984 - __main__ - INFO - ASTa1254_Temperature: 953703 non-null values
-2025-03-28 16:10:15,985 - __main__ - INFO - ASTa1257_Temperature: 1153419 non-null values
-2025-03-28 16:10:15,986 - __main__ - INFO - TP1151769_Temperature: 953703 non-null values
-2025-03-28 16:10:15,987 - __main__ - INFO - TP1152497_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,988 - __main__ - INFO - TP1317162_Temperature: 953703 non-null values
-2025-03-28 16:10:15,989 - __main__ - INFO - TP1152501_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,990 - __main__ - INFO - TP1153165_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,991 - __main__ - INFO - TP1152499_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,992 - __main__ - INFO - TP1152500_Temperature: 953703 non-null values
-2025-03-28 16:10:15,993 - __main__ - INFO - TP1153137_Temperature: 1169702 non-null values
-2025-03-28 16:10:15,994 - __main__ - INFO - TP1317164_Temperature: 953703 non-null values
-2025-03-28 16:10:16,011 - __main__ - INFO - Full data time range: 2023-08-01 00:00:00 to 2023-08-12 17:59:56.100000
-2025-03-28 16:10:16,011 - __main__ - INFO - Processing data up to: 2025-03-28 15:45:00
-2025-03-28 16:10:16,011 - __main__ - INFO - Found 0 temperature sensors and 0 weather sensors
-2025-03-28 16:10:16,011 - __main__ - WARNING - No known temperature or weather sensors found in data
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: VAS1000_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: VAS1001_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: VAS1002_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: VAST1239_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: ASTa1239_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: ASTa1241_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: ASTa1243_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: ASTa1249_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: ASTa1250_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: ASTa1252_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: ASTa1254_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: ASTa1257_Temperature
-2025-03-28 16:10:16,011 - __main__ - INFO - Adding possible temperature sensor: TP1151769_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Adding possible temperature sensor: TP1152497_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Adding possible temperature sensor: TP1317162_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Adding possible temperature sensor: TP1152501_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Adding possible temperature sensor: TP1153165_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Adding possible temperature sensor: TP1152499_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Adding possible temperature sensor: TP1152500_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Adding possible temperature sensor: TP1153137_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Adding possible temperature sensor: TP1317164_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Found temperature sensors: VAS1000_Temperature, VAS1001_Temperature, VAS1002_Temperature, VAST1239_Temperature, ASTa1239_Temperature, ASTa1241_Temperature, ASTa1243_Temperature, ASTa1249_Temperature, ASTa1250_Temperature, ASTa1252_Temperature, ASTa1254_Temperature, ASTa1257_Temperature, TP1151769_Temperature, TP1152497_Temperature, TP1317162_Temperature, TP1152501_Temperature, TP1153165_Temperature, TP1152499_Temperature, TP1152500_Temperature, TP1153137_Temperature, TP1317164_Temperature
-2025-03-28 16:10:16,012 - __main__ - INFO - Found weather sensors: 
-2025-03-28 16:10:16,012 - __main__ - INFO - Processing temperature data...
-2025-03-28 16:10:16,012 - __main__ - INFO - Aggregating data to 15-minute intervals
-2025-03-28 16:10:16,109 - __main__ - INFO - Processing sensor: VAS1000_Temperature
-2025-03-28 16:10:16,119 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAS1000_Temperature
-2025-03-28 16:10:16,133 - __main__ - INFO - Processing sensor: VAS1001_Temperature
-2025-03-28 16:10:16,141 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAS1001_Temperature
-2025-03-28 16:10:16,150 - __main__ - INFO - Processing sensor: VAS1002_Temperature
-2025-03-28 16:10:16,157 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAS1002_Temperature
-2025-03-28 16:10:16,166 - __main__ - INFO - Processing sensor: VAST1239_Temperature
-2025-03-28 16:10:16,172 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAST1239_Temperature
-2025-03-28 16:10:16,182 - __main__ - INFO - Processing sensor: ASTa1239_Temperature
-2025-03-28 16:10:16,188 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1239_Temperature
-2025-03-28 16:10:16,197 - __main__ - INFO - Processing sensor: ASTa1241_Temperature
-2025-03-28 16:10:16,204 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1241_Temperature
-2025-03-28 16:10:16,213 - __main__ - INFO - Processing sensor: ASTa1243_Temperature
-2025-03-28 16:10:16,220 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1243_Temperature
-2025-03-28 16:10:16,229 - __main__ - INFO - Processing sensor: ASTa1249_Temperature
-2025-03-28 16:10:16,275 - __main__ - WARNING - No valid aggregated data for sensor ASTa1249_Temperature
-2025-03-28 16:10:16,275 - __main__ - INFO - Processing sensor: ASTa1250_Temperature
-2025-03-28 16:10:16,282 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1250_Temperature
-2025-03-28 16:10:16,292 - __main__ - INFO - Processing sensor: ASTa1252_Temperature
-2025-03-28 16:10:16,297 - __main__ - INFO - Filtered out 1059900 rows with near-zero values for sensor ASTa1252_Temperature
-2025-03-28 16:10:16,302 - __main__ - INFO - Processing sensor: ASTa1254_Temperature
-2025-03-28 16:10:16,345 - __main__ - WARNING - No valid aggregated data for sensor ASTa1254_Temperature
-2025-03-28 16:10:16,345 - __main__ - INFO - Processing sensor: ASTa1257_Temperature
-2025-03-28 16:10:16,352 - __main__ - INFO - Filtered out 969986 rows with near-zero values for sensor ASTa1257_Temperature
-2025-03-28 16:10:16,361 - __main__ - INFO - Processing sensor: TP1151769_Temperature
-2025-03-28 16:10:16,413 - __main__ - WARNING - No valid aggregated data for sensor TP1151769_Temperature
-2025-03-28 16:10:16,413 - __main__ - INFO - Processing sensor: TP1152497_Temperature
-2025-03-28 16:10:16,425 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1152497_Temperature
-2025-03-28 16:10:16,439 - __main__ - INFO - Processing sensor: TP1317162_Temperature
-2025-03-28 16:10:16,532 - __main__ - WARNING - No valid aggregated data for sensor TP1317162_Temperature
-2025-03-28 16:10:16,532 - __main__ - INFO - Processing sensor: TP1152501_Temperature
-2025-03-28 16:10:16,545 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1152501_Temperature
-2025-03-28 16:10:16,560 - __main__ - INFO - Processing sensor: TP1153165_Temperature
-2025-03-28 16:10:16,571 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1153165_Temperature
-2025-03-28 16:10:16,584 - __main__ - INFO - Processing sensor: TP1152499_Temperature
-2025-03-28 16:10:16,595 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1152499_Temperature
-2025-03-28 16:10:16,611 - __main__ - INFO - Processing sensor: TP1152500_Temperature
-2025-03-28 16:10:16,673 - __main__ - WARNING - No valid aggregated data for sensor TP1152500_Temperature
-2025-03-28 16:10:16,673 - __main__ - INFO - Processing sensor: TP1153137_Temperature
-2025-03-28 16:10:16,682 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1153137_Temperature
-2025-03-28 16:10:16,693 - __main__ - INFO - Processing sensor: TP1317164_Temperature
-2025-03-28 16:10:16,737 - __main__ - WARNING - No valid aggregated data for sensor TP1317164_Temperature
-2025-03-28 16:10:16,738 - __main__ - INFO - Aggregated data: 371 rows with valid values across 15 sensors
-2025-03-28 16:10:16,745 - __main__ - INFO - Aggregated temperature data: 371 rows
-2025-03-28 16:10:16,746 - __main__ - INFO - Filtered out 0 rows with null values, zeros, or invalid data
-2025-03-28 16:10:16,746 - __main__ - INFO - Using output directory: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min
-2025-03-28 16:10:16,746 - __main__ - INFO - Output file does not exist: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min/temperature_15min_20250328.csv
-2025-03-28 16:10:16,749 - __main__ - INFO - Successfully saved 371 rows of valid temperature data to /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min/temperature_15min_20250328.csv
-2025-03-28 16:10:16,750 - __main__ - INFO - Updated last processed time to 2023-08-12 17:59:56.100000
-2025-03-28 16:10:16,750 - __main__ - INFO - Updated last processed time to: 2023-08-12 17:59:56.100000
-2025-03-28 16:10:16,750 - __main__ - INFO - Processing complete
+2025-03-28 16:51:38,739 - __main__ - INFO - Using output directory: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed
+2025-03-28 16:51:38,741 - __main__ - INFO - Last processed time: 2023-08-12 17:59:56.100000
+2025-03-28 16:51:38,742 - __main__ - INFO - Processing all data regardless of last processed time
+2025-03-28 16:51:38,742 - __main__ - INFO - Reading TDMS file: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/raw/Waterloo_R246_08_01_2023_00_31_55_Normal Data_AllHighSpeed.tdms
+2025-03-28 16:51:42,505 - __main__ - INFO - Time range: 0.0 to 1015196.0999999997
+2025-03-28 16:51:42,505 - __main__ - INFO - Interpolating channel VAS1000 from 216010 to 1169702 points
+2025-03-28 16:51:42,879 - __main__ - INFO - Interpolating channel VAS1001 from 216026 to 1169702 points
+2025-03-28 16:51:42,895 - __main__ - INFO - Interpolating channel VAS1002 from 216013 to 1169702 points
+2025-03-28 16:51:42,911 - __main__ - INFO - Interpolating channel VAST1239 from 216013 to 1169702 points
+2025-03-28 16:51:42,927 - __main__ - INFO - Interpolating channel ASTa1239 from 215953 to 1169702 points
+2025-03-28 16:51:42,943 - __main__ - INFO - Interpolating channel ASTa1241 from 215971 to 1169702 points
+2025-03-28 16:51:42,960 - __main__ - INFO - Interpolating channel ASTa1243 from 215982 to 1169702 points
+2025-03-28 16:51:42,977 - __main__ - INFO - Interpolating channel ASTa1249 from 216014 to 1169702 points
+2025-03-28 16:51:42,995 - __main__ - INFO - Interpolating channel ASTa1250 from 216010 to 1169702 points
+2025-03-28 16:51:43,014 - __main__ - INFO - Interpolating channel ASTa1252 from 216010 to 1169702 points
+2025-03-28 16:51:43,030 - __main__ - INFO - Interpolating channel ASTa1254 from 216010 to 1169702 points
+2025-03-28 16:51:43,046 - __main__ - INFO - Interpolating channel ASTa1257 from 216010 to 1169702 points
+2025-03-28 16:51:43,065 - __main__ - INFO - Interpolating channel TP1151769 from 215982 to 1169702 points
+2025-03-28 16:51:43,080 - __main__ - INFO - Interpolating channel TP1152497 from 216006 to 1169702 points
+2025-03-28 16:51:43,096 - __main__ - INFO - Interpolating channel TP1317162 from 216009 to 1169702 points
+2025-03-28 16:51:43,112 - __main__ - INFO - Interpolating channel TP1152501 from 216009 to 1169702 points
+2025-03-28 16:51:43,127 - __main__ - INFO - Interpolating channel TP1153165 from 215978 to 1169702 points
+2025-03-28 16:51:43,142 - __main__ - INFO - Interpolating channel TP1152499 from 216020 to 1169702 points
+2025-03-28 16:51:43,158 - __main__ - INFO - Interpolating channel TP1152500 from 216000 to 1169702 points
+2025-03-28 16:51:43,175 - __main__ - INFO - Interpolating channel TP1153137 from 216018 to 1169702 points
+2025-03-28 16:51:43,191 - __main__ - INFO - Interpolating channel TP1317164 from 215989 to 1169702 points
+2025-03-28 16:51:43,207 - __main__ - INFO - Interpolating channel MDD-001_ML1 from 216002 to 1169702 points
+2025-03-28 16:51:43,224 - __main__ - INFO - Interpolating channel MDD-001_ML2 from 216002 to 1169702 points
+2025-03-28 16:51:43,239 - __main__ - INFO - Interpolating channel MDD-001_ML3 from 215979 to 1169702 points
+2025-03-28 16:51:43,254 - __main__ - INFO - Interpolating channel MDD-001_ML4 from 215948 to 1169702 points
+2025-03-28 16:51:43,270 - __main__ - INFO - Interpolating channel MDD-002_ML1 from 216015 to 1169702 points
+2025-03-28 16:51:43,292 - __main__ - INFO - Interpolating channel MDD-002_ML2 from 216015 to 1169702 points
+2025-03-28 16:51:43,309 - __main__ - INFO - Interpolating channel MDD-002_ML3 from 216015 to 1169702 points
+2025-03-28 16:51:43,327 - __main__ - INFO - Interpolating channel MDD-002_ML4 from 216015 to 1169702 points
+2025-03-28 16:51:43,457 - __main__ - INFO - Extracted date 2023-08-01 from Waterloo filename format: Waterloo_R246_08_01_2023_00_31_55_Normal Data_AllHighSpeed.tdms
+2025-03-28 16:51:43,457 - __main__ - INFO - Extracted date 2023-08-01 from filename Waterloo_R246_08_01_2023_00_31_55_Normal Data_AllHighSpeed.tdms
+2025-03-28 16:51:43,663 - __main__ - INFO - Created DataFrame with 1169702 rows and 52 columns
+2025-03-28 16:51:43,663 - __main__ - INFO - Columns: Time, VAS1000, VAS1001, VAS1002, VAST1239, ASTa1239, ASTa1241, ASTa1243, ASTa1249, ASTa1250, ASTa1252, ASTa1254, ASTa1257, TP1151769, TP1152497, TP1317162, TP1152501, TP1153165, TP1152499, TP1152500, TP1153137, TP1317164, MDD-001_ML1, MDD-001_ML2, MDD-001_ML3, MDD-001_ML4, MDD-002_ML1, MDD-002_ML2, MDD-002_ML3, MDD-002_ML4, VAS1000_Temperature, VAS1001_Temperature, VAS1002_Temperature, VAST1239_Temperature, ASTa1239_Temperature, ASTa1241_Temperature, ASTa1243_Temperature, ASTa1249_Temperature, ASTa1250_Temperature, ASTa1252_Temperature, ASTa1254_Temperature, ASTa1257_Temperature, TP1151769_Temperature, TP1152497_Temperature, TP1317162_Temperature, TP1152501_Temperature, TP1153165_Temperature, TP1152499_Temperature, TP1152500_Temperature, TP1153137_Temperature, TP1317164_Temperature, timestamp
+2025-03-28 16:51:43,663 - __main__ - INFO - Data statistics:
+2025-03-28 16:51:43,665 - __main__ - INFO - Time range: 2023-08-01 00:00:00 to 2023-08-12 17:59:56.100000
+2025-03-28 16:51:43,674 - __main__ - INFO - Number of unique timestamps: 216000
+2025-03-28 16:51:43,675 - __main__ - INFO - VAS1000: 1169702 non-null values
+2025-03-28 16:51:43,676 - __main__ - INFO - VAS1001: 1169702 non-null values
+2025-03-28 16:51:43,677 - __main__ - INFO - VAS1002: 1169702 non-null values
+2025-03-28 16:51:43,679 - __main__ - INFO - VAST1239: 1169702 non-null values
+2025-03-28 16:51:43,680 - __main__ - INFO - ASTa1239: 1169702 non-null values
+2025-03-28 16:51:43,681 - __main__ - INFO - ASTa1241: 1169702 non-null values
+2025-03-28 16:51:43,682 - __main__ - INFO - ASTa1243: 1169702 non-null values
+2025-03-28 16:51:43,683 - __main__ - INFO - ASTa1249: 1169702 non-null values
+2025-03-28 16:51:43,684 - __main__ - INFO - ASTa1250: 1169702 non-null values
+2025-03-28 16:51:43,685 - __main__ - INFO - ASTa1252: 1169702 non-null values
+2025-03-28 16:51:43,687 - __main__ - INFO - ASTa1254: 1169702 non-null values
+2025-03-28 16:51:43,688 - __main__ - INFO - ASTa1257: 1169702 non-null values
+2025-03-28 16:51:43,689 - __main__ - INFO - TP1151769: 1169702 non-null values
+2025-03-28 16:51:43,691 - __main__ - INFO - TP1152497: 1169702 non-null values
+2025-03-28 16:51:43,692 - __main__ - INFO - TP1317162: 1169702 non-null values
+2025-03-28 16:51:43,693 - __main__ - INFO - TP1152501: 1169702 non-null values
+2025-03-28 16:51:43,694 - __main__ - INFO - TP1153165: 1169702 non-null values
+2025-03-28 16:51:43,695 - __main__ - INFO - TP1152499: 1169702 non-null values
+2025-03-28 16:51:43,696 - __main__ - INFO - TP1152500: 1169702 non-null values
+2025-03-28 16:51:43,698 - __main__ - INFO - TP1153137: 1169702 non-null values
+2025-03-28 16:51:43,699 - __main__ - INFO - TP1317164: 1169702 non-null values
+2025-03-28 16:51:43,700 - __main__ - INFO - MDD-001_ML1: 1169702 non-null values
+2025-03-28 16:51:43,701 - __main__ - INFO - MDD-001_ML2: 1169702 non-null values
+2025-03-28 16:51:43,703 - __main__ - INFO - MDD-001_ML3: 1169702 non-null values
+2025-03-28 16:51:43,704 - __main__ - INFO - MDD-001_ML4: 1169702 non-null values
+2025-03-28 16:51:43,705 - __main__ - INFO - MDD-002_ML1: 1169702 non-null values
+2025-03-28 16:51:43,706 - __main__ - INFO - MDD-002_ML2: 1169702 non-null values
+2025-03-28 16:51:43,707 - __main__ - INFO - MDD-002_ML3: 1169702 non-null values
+2025-03-28 16:51:43,708 - __main__ - INFO - MDD-002_ML4: 1169702 non-null values
+2025-03-28 16:51:43,709 - __main__ - INFO - VAS1000_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,710 - __main__ - INFO - VAS1001_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,711 - __main__ - INFO - VAS1002_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,712 - __main__ - INFO - VAST1239_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,713 - __main__ - INFO - ASTa1239_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,714 - __main__ - INFO - ASTa1241_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,715 - __main__ - INFO - ASTa1243_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,716 - __main__ - INFO - ASTa1249_Temperature: 953703 non-null values
+2025-03-28 16:51:43,718 - __main__ - INFO - ASTa1250_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,718 - __main__ - INFO - ASTa1252_Temperature: 1063505 non-null values
+2025-03-28 16:51:43,720 - __main__ - INFO - ASTa1254_Temperature: 953703 non-null values
+2025-03-28 16:51:43,721 - __main__ - INFO - ASTa1257_Temperature: 1153419 non-null values
+2025-03-28 16:51:43,721 - __main__ - INFO - TP1151769_Temperature: 953703 non-null values
+2025-03-28 16:51:43,722 - __main__ - INFO - TP1152497_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,723 - __main__ - INFO - TP1317162_Temperature: 953703 non-null values
+2025-03-28 16:51:43,724 - __main__ - INFO - TP1152501_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,725 - __main__ - INFO - TP1153165_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,726 - __main__ - INFO - TP1152499_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,727 - __main__ - INFO - TP1152500_Temperature: 953703 non-null values
+2025-03-28 16:51:43,729 - __main__ - INFO - TP1153137_Temperature: 1169702 non-null values
+2025-03-28 16:51:43,730 - __main__ - INFO - TP1317164_Temperature: 953703 non-null values
+2025-03-28 16:51:43,748 - __main__ - INFO - Full data time range: 2023-08-01 00:00:00 to 2023-08-12 17:59:56.100000
+2025-03-28 16:51:43,748 - __main__ - INFO - Processing data up to: 2025-03-28 16:30:00
+2025-03-28 16:51:43,748 - __main__ - INFO - Found 0 temperature sensors and 0 weather sensors
+2025-03-28 16:51:43,748 - __main__ - WARNING - No known temperature or weather sensors found in data
+2025-03-28 16:51:43,748 - __main__ - INFO - Adding possible temperature sensor: VAS1000_Temperature
+2025-03-28 16:51:43,748 - __main__ - INFO - Adding possible temperature sensor: VAS1001_Temperature
+2025-03-28 16:51:43,748 - __main__ - INFO - Adding possible temperature sensor: VAS1002_Temperature
+2025-03-28 16:51:43,748 - __main__ - INFO - Adding possible temperature sensor: VAST1239_Temperature
+2025-03-28 16:51:43,748 - __main__ - INFO - Adding possible temperature sensor: ASTa1239_Temperature
+2025-03-28 16:51:43,748 - __main__ - INFO - Adding possible temperature sensor: ASTa1241_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: ASTa1243_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: ASTa1249_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: ASTa1250_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: ASTa1252_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: ASTa1254_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: ASTa1257_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: TP1151769_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: TP1152497_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: TP1317162_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: TP1152501_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: TP1153165_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: TP1152499_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: TP1152500_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: TP1153137_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Adding possible temperature sensor: TP1317164_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Found temperature sensors: VAS1000_Temperature, VAS1001_Temperature, VAS1002_Temperature, VAST1239_Temperature, ASTa1239_Temperature, ASTa1241_Temperature, ASTa1243_Temperature, ASTa1249_Temperature, ASTa1250_Temperature, ASTa1252_Temperature, ASTa1254_Temperature, ASTa1257_Temperature, TP1151769_Temperature, TP1152497_Temperature, TP1317162_Temperature, TP1152501_Temperature, TP1153165_Temperature, TP1152499_Temperature, TP1152500_Temperature, TP1153137_Temperature, TP1317164_Temperature
+2025-03-28 16:51:43,749 - __main__ - INFO - Found weather sensors: 
+2025-03-28 16:51:43,749 - __main__ - INFO - Processing temperature data...
+2025-03-28 16:51:43,749 - __main__ - INFO - Aggregating data to 15-minute intervals
+2025-03-28 16:51:43,841 - __main__ - INFO - Processing sensor: VAS1000_Temperature
+2025-03-28 16:51:43,849 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAS1000_Temperature
+2025-03-28 16:51:43,863 - __main__ - INFO - Processing sensor: VAS1001_Temperature
+2025-03-28 16:51:43,869 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAS1001_Temperature
+2025-03-28 16:51:43,878 - __main__ - INFO - Processing sensor: VAS1002_Temperature
+2025-03-28 16:51:43,886 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAS1002_Temperature
+2025-03-28 16:51:43,895 - __main__ - INFO - Processing sensor: VAST1239_Temperature
+2025-03-28 16:51:43,901 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor VAST1239_Temperature
+2025-03-28 16:51:43,910 - __main__ - INFO - Processing sensor: ASTa1239_Temperature
+2025-03-28 16:51:43,917 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1239_Temperature
+2025-03-28 16:51:43,926 - __main__ - INFO - Processing sensor: ASTa1241_Temperature
+2025-03-28 16:51:43,932 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1241_Temperature
+2025-03-28 16:51:43,941 - __main__ - INFO - Processing sensor: ASTa1243_Temperature
+2025-03-28 16:51:43,947 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1243_Temperature
+2025-03-28 16:51:43,956 - __main__ - INFO - Processing sensor: ASTa1249_Temperature
+2025-03-28 16:51:44,000 - __main__ - WARNING - No valid aggregated data for sensor ASTa1249_Temperature
+2025-03-28 16:51:44,000 - __main__ - INFO - Processing sensor: ASTa1250_Temperature
+2025-03-28 16:51:44,007 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor ASTa1250_Temperature
+2025-03-28 16:51:44,016 - __main__ - INFO - Processing sensor: ASTa1252_Temperature
+2025-03-28 16:51:44,022 - __main__ - INFO - Filtered out 1059900 rows with near-zero values for sensor ASTa1252_Temperature
+2025-03-28 16:51:44,027 - __main__ - INFO - Processing sensor: ASTa1254_Temperature
+2025-03-28 16:51:44,067 - __main__ - WARNING - No valid aggregated data for sensor ASTa1254_Temperature
+2025-03-28 16:51:44,067 - __main__ - INFO - Processing sensor: ASTa1257_Temperature
+2025-03-28 16:51:44,074 - __main__ - INFO - Filtered out 969986 rows with near-zero values for sensor ASTa1257_Temperature
+2025-03-28 16:51:44,083 - __main__ - INFO - Processing sensor: TP1151769_Temperature
+2025-03-28 16:51:44,124 - __main__ - WARNING - No valid aggregated data for sensor TP1151769_Temperature
+2025-03-28 16:51:44,125 - __main__ - INFO - Processing sensor: TP1152497_Temperature
+2025-03-28 16:51:44,132 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1152497_Temperature
+2025-03-28 16:51:44,142 - __main__ - INFO - Processing sensor: TP1317162_Temperature
+2025-03-28 16:51:44,187 - __main__ - WARNING - No valid aggregated data for sensor TP1317162_Temperature
+2025-03-28 16:51:44,188 - __main__ - INFO - Processing sensor: TP1152501_Temperature
+2025-03-28 16:51:44,196 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1152501_Temperature
+2025-03-28 16:51:44,205 - __main__ - INFO - Processing sensor: TP1153165_Temperature
+2025-03-28 16:51:44,212 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1153165_Temperature
+2025-03-28 16:51:44,221 - __main__ - INFO - Processing sensor: TP1152499_Temperature
+2025-03-28 16:51:44,227 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1152499_Temperature
+2025-03-28 16:51:44,236 - __main__ - INFO - Processing sensor: TP1152500_Temperature
+2025-03-28 16:51:44,279 - __main__ - WARNING - No valid aggregated data for sensor TP1152500_Temperature
+2025-03-28 16:51:44,279 - __main__ - INFO - Processing sensor: TP1153137_Temperature
+2025-03-28 16:51:44,286 - __main__ - INFO - Filtered out 953703 rows with near-zero values for sensor TP1153137_Temperature
+2025-03-28 16:51:44,296 - __main__ - INFO - Processing sensor: TP1317164_Temperature
+2025-03-28 16:51:44,339 - __main__ - WARNING - No valid aggregated data for sensor TP1317164_Temperature
+2025-03-28 16:51:44,342 - __main__ - INFO - Aggregated data: 371 rows with valid values across 15 sensors
+2025-03-28 16:51:44,348 - __main__ - INFO - Aggregated temperature data: 371 rows
+2025-03-28 16:51:44,349 - __main__ - INFO - Filtered out 0 rows with null values, zeros, or invalid data
+2025-03-28 16:51:44,349 - __main__ - INFO - Using output directory: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min
+2025-03-28 16:51:44,349 - __main__ - INFO - Output file exists: /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min/temperature_15min_20250328.csv
+2025-03-28 16:51:44,352 - __main__ - INFO - Successfully saved 371 rows of valid temperature data to /Users/hamza/Desktop/Pavement Performance URA Project/pavement_data/processed/15min/temperature_15min_20250328.csv
+2025-03-28 16:51:44,353 - __main__ - INFO - Updated last processed time to 2023-08-12 17:59:56.100000
+2025-03-28 16:51:44,353 - __main__ - INFO - Updated last processed time to: 2023-08-12 17:59:56.100000
+2025-03-28 16:51:44,353 - __main__ - INFO - Processing complete
